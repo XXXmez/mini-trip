@@ -1,0 +1,66 @@
+.button {
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.2s, transform 0.1s;
+
+  // отключаем hover на тач-устройствах
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* --- Sizes --- */
+.xs {
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.sm {
+  font-size: 14px;
+  padding: 6px 12px;
+}
+
+.md {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.lg {
+  font-size: 18px;
+  padding: 10px 20px;
+}
+
+.xl {
+  font-size: 20px;
+  padding: 12px 24px;
+}
+
+/* --- Variants --- */
+.primary {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.danger {
+  background-color: #e53935;
+  color: #fff;
+}
+
+.ghost {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+}

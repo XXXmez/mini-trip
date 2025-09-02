@@ -1,0 +1,26 @@
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4caf50;
+}
+
+/* Светлая */
+.theme-light {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --primary-color: #4caf50;
+}
+
+/* Тёмная */
+.theme-dark {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #bb86fc;
+}
+
+/* Тёмно-зелёная */
+.theme-dark-green {
+  --bg-color: #0d1a0f;
+  --text-color: #e0f2e9;
+  --primary-color: #2e7d32;
+}

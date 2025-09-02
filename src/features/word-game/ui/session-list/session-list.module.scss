@@ -1,0 +1,66 @@
+.sessionList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  overflow: auto;
+  height: 100%;
+
+  .sessions {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+    overflow: auto;
+    padding-bottom: 20px;
+  }
+
+  .session {
+    width: 100%;
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-columns: 1fr min-content;
+    padding: 8px 12px;
+    align-items: center;
+
+    .sessionInfo {
+      display: flex;
+      flex-direction: column;
+
+      &Name {
+        text-transform: capitalize;
+      }
+
+      .sessionInfoRaw {
+        display: flex;
+        gap: 16px;
+      }
+    }
+    .sessionAction {}
+  }
+
+  .newGameBtn {
+    width: 100%;
+    height: 56px;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .saveTitle {
+    font-size: 1.25rem;
+  }
+
+  .sorting {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .sortTitle {
+    font-size: 1rem;
+  }
+}
