@@ -1,0 +1,130 @@
+import styles from './word-game-page.module.scss';
+import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
+import {
+  GameConfigModel,
+  GameMode,
+  GameSessionModel,
+  TurnTime,
+  TurnTimeLabels,
+} from 'src/entities/word-game/config';
+import { useState } from 'react';
+import { WordGameConfiguration } from 'src/entities/word-game/ui/word-game-configuration/word-game-configuration.tsx';
+import { WordGameContent } from 'src/entities/word-game/ui/word-game-content/word-game-content.tsx';
+import { ChevronLeftIcon, Header, IconButton } from 'src/shared';
+import { useNavigate } from 'react-router-dom';
+import { SessionList } from 'src/features';
+
+const keyGame = 'word-game-sessions';
+
+enum GameScreen {
+  LIST = 'list',
+  CONFIG = 'config',
+  GAME = 'game',
+}
+
+export function WordGamePage() {
+  const navigate = useNavigate();
+
+  const [sessions, setSessions] = useLocalStorage<GameSessionModel[]>(
+    keyGame,
+    [],
+  );
+
+  const [screen, setScreen] = useState<GameScreen>(GameScreen.LIST);
+  const [activeSession, setActiveSession] = useState<GameSessionModel | null>(
+    null,
+  );
+
+  const handleNewGame = () => {
+    setScreen(GameScreen.CONFIG);
+  };
+
+  const handleSelectSession = (session: GameSessionModel) => {
+    setActiveSession(session);
+    setScreen(GameScreen.GAME);
+  };
+
+  function onNavigateBack() {
+    if (screen === GameScreen.LIST) {
+      navigate('/');
+    }
+    if (screen === GameScreen.CONFIG) {
+      setScreen(GameScreen.LIST);
+    }
+    if (screen === GameScreen.GAME) {
+      setScreen(GameScreen.LIST);
+    }
+  }
+
+  const handleDelete = (id: string) => {
+    const updated = sessions.filter((s) => s.id !== id);
+    setSessions(updated);
+  };
+
+  return (
+    <div className={styles.wordGamePage}>
+      <Header
+        paddingY={'xlarge'}
+        left={
+          <IconButton
+            icon={<ChevronLeftIcon />}
+            size={'xsmall'}
+            onClick={onNavigateBack}
+          />
+        }
+        center={<h2 className={styles.title}>Словесная дуэль</h2>}
+      />
+      <div className={styles.content}>
+        {screen === GameScreen.LIST && (
+          <SessionList
+            sessions={sessions}
+            onNewGame={handleNewGame}
+            onSelect={handleSelectSession}
+            onDelete={handleDelete}
+          />
+        )}
+
+        {screen === 'config' && (
+          <WordGameConfiguration
+            sessions={sessions}
+            onSave={(session) => {
+              setSessions([...sessions, session]);
+              setActiveSession(session);
+              setScreen(GameScreen.GAME);
+            }}
+          />
+        )}
+
+        {screen === 'game' && activeSession && (
+          <WordGameContent
+            session={activeSession}
+            onExit={() => setScreen(GameScreen.LIST)}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Преобразует конфигурацию игры в человеко-читаемое описание.
+ */
+export function getGameConfigDescription(config: GameConfigModel): string {
+  switch (config.mode) {
+    case GameMode.SINGLE_LETTER:
+      return `Режим: На букву «${config.letter?.toUpperCase()}»`;
+
+    case GameMode.LAST_LETTER:
+      return 'Режим: Последняя буква';
+
+    default:
+      return 'Режим: Неизвестно';
+  }
+}
+
+/**
+ * Преобразует ограничение времени в человеко-читаемое описание.
+ */
+export function getTurnTimeDescription(turnTime: TurnTime): string {
+  return `Время хода: ${TurnTimeLabels[turnTime]}`;
+}

@@ -1,0 +1,42 @@
+/* Модалка */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right:0;
+  bottom:0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #545454;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-height: 70%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modalContent h2 {
+  margin-top: 0;
+}
+
+.modalClose {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.wordsList {
+  list-style: disc;
+  margin-left: 20px;
+}
