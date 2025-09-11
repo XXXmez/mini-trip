@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import styles from './Modal.module.scss';
+import styles from './modal.module.scss';
 import { CloseIcon, Header, IconButton } from 'src/shared';
 
 interface ModalProps {
