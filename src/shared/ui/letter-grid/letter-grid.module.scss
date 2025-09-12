@@ -2,23 +2,46 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-auto-rows: 44px;
+  border: 1px solid var(--primary-color);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid var(--primary-color);
+
+  // делаем сетку как таблицу, чтобы не было двойных границ
+  > .letter {
+    border: none;
+    border-right: 1px solid var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+  }
+
+  // убираем правый бордер у последнего столбца
+  > .letter:nth-child(7n) {
+    border-right: none;
+  }
+
+  // убираем нижний бордер у последней строки
+  > .letter:nth-last-child(-n + 7) {
+    border-bottom: none;
+  }
 }
 
 .letter {
   cursor: pointer;
   font-size: 16px;
   background: transparent;
-  border: 1px solid var(--primary-color);
+  transition: background-color 0.2s;
+  color: var(--text-color);
 
-  &:hover {
-    background-color: rgba(111, 152, 99, 0.05);
-  }
+  //&:hover {
+  //  background-color: rgba(111, 152, 99, 0.05);
+  //}
 }
 
 .active {
-  border-color: var(--primary-color);
   background-color: var(--primary-color);
+  color: #fff;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

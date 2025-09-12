@@ -1,13 +1,16 @@
 .wordGamePage {
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-rows: min-content 1fr;
 
   .title {
     text-align: center;
     font-size: 2rem;
   }
 
-  .content {}
-
-
+  .content {
+    width: 100%;
+    height: 100%;
+  }
 }

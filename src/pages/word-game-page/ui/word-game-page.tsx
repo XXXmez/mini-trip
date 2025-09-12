@@ -61,6 +61,30 @@ export function WordGamePage() {
     setSessions(updated);
   };
 
+  const handleAddWord = (sessionId: string, word: string) => {
+    const updated = sessions.map((s) =>
+      s.id === sessionId
+        ? {
+            ...s,
+            usedWords: [...s.usedWords, word],
+            updatedAt: new Date().toISOString(),
+          }
+        : s,
+    );
+    setSessions(updated);
+    setActiveSession(updated.find((s) => s.id === sessionId) ?? null);
+  };
+
+  const handleFinish = (sessionId: string) => {
+    const updated = sessions.map((s) =>
+      s.id === sessionId
+        ? { ...s, isFinished: true, updatedAt: new Date().toISOString() }
+        : s,
+    );
+    setSessions(updated);
+    setScreen(GameScreen.LIST);
+  };
+
   return (
     <div className={styles.wordGamePage}>
       <Header
@@ -99,6 +123,8 @@ export function WordGamePage() {
           <WordGameContent
             session={activeSession}
             onExit={() => setScreen(GameScreen.LIST)}
+            onAddWord={handleAddWord}
+            onFinish={handleFinish}
           />
         )}
       </div>
@@ -126,5 +152,5 @@ export function getGameConfigDescription(config: GameConfigModel): string {
  * Преобразует ограничение времени в человеко-читаемое описание.
  */
 export function getTurnTimeDescription(turnTime: TurnTime): string {
-  return `Время хода: ${TurnTimeLabels[turnTime]}`;
+  return `${TurnTimeLabels[turnTime]}`;
 }

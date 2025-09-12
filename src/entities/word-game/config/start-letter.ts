@@ -24,7 +24,6 @@ export enum StartLetter {
   CH = 'ч',
   SH = 'ш',
   SCH = 'щ',
-  Y = 'ы',
   YE = 'э',
   YU = 'ю',
   YA = 'я',

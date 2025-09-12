@@ -8,10 +8,12 @@
 
 .label {
   position: absolute;
-  top: -12px;
+  top: -10px;
   left: 12px;
   background-color: var(--bg-color);
   padding: 0 2px;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .select {
@@ -19,7 +21,7 @@
   height: 100%;
   padding: 0.5rem 0.75rem;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-color);
   border-radius: 8px;
   outline: none;
   appearance: none; // убираем стандартную стрелку браузера
@@ -28,6 +30,7 @@
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 16px;
+  color: var(--text-color);
 
   &:focus {
     border-color: var(--primary-color);

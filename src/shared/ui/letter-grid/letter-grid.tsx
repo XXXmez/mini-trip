@@ -15,10 +15,8 @@ export const LetterGrid: FC<LetterGridProps> = ({
 }) => {
   const letters = Object.values(StartLetter);
 
-  const opacity = disabled ? 0.5 : undefined;
-
   return (
-    <div className={styles.grid} style={{ opacity }}>
+    <div className={`${styles.grid} ${disabled ? styles.disabled : ''}`}>
       {letters.map((letter) => (
         <button
           disabled={disabled}

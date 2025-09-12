@@ -1,13 +1,14 @@
-import { FC } from 'react';
 import styles from './switch.module.scss';
 
 interface SwitchProps {
-  checked: boolean;
-  onChange: (value: boolean) => void;
-  disabled?: boolean;
+  readonly checked: boolean;
+  readonly onChange: (value: boolean) => void;
+  readonly disabled?: boolean;
 }
 
-export const Switch: FC<SwitchProps> = ({ checked, onChange, disabled }) => {
+export function Switch(props: SwitchProps) {
+  const { checked, onChange, disabled } = props;
+
   return (
     <button
       type='button'
@@ -20,4 +21,4 @@ export const Switch: FC<SwitchProps> = ({ checked, onChange, disabled }) => {
       <span className={styles.thumb} />
     </button>
   );
-};
+}

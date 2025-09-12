@@ -8,10 +8,12 @@
 
 .label {
   position: absolute;
-  top: -12px;
+  top: -10px;
   left: 12px;
   background-color: var(--bg-color);
   padding: 0 2px;
+  color: var(--text-color);
+  opacity: 0.8;
 }
 
 .input {
@@ -20,16 +22,18 @@
   background: transparent;
   padding: 0.5rem 0.75rem;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--primary-color);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.2s;
+  color: var(--text-color);
 
-  &:focus {
-    border-color: var(--primary-color);
-  }
+  //&:focus {
+  //  border-color: var(--primary-color);
+  //}
 
   &::placeholder {
-    color: #aaa;
+    color: var(--text-color);
+    opacity: 0.6;
   }
 }

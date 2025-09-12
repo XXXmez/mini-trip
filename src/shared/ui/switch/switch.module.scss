@@ -1,8 +1,8 @@
 .switch {
   position: relative;
-  width: 50px;
-  height: 28px;
-  border-radius: 14px;
+  width: 38px;
+  height: 20px;
+  border-radius: 10px;
   background-color: #ccc;
   border: none;
   cursor: pointer;
@@ -17,8 +17,8 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 24px;
-  height: 24px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background-color: #fff;
   transition: transform 0.2s ease;
@@ -28,7 +28,7 @@
   background-color: var(--primary-color);
 
   .thumb {
-    transform: translateX(22px);
+    transform: translateX(18px);
   }
 }
 

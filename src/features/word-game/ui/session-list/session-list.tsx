@@ -43,7 +43,14 @@ export function SessionList(props: SessionListProps) {
             <div
               key={session.id}
               className={styles.session}
-              onClick={() => onSelect(session)}
+              onClick={() => {
+                if (!session.isFinished) {
+                  onSelect(session);
+                }
+              }}
+              style={{
+                backgroundColor: session.isFinished ? '#ed8080' : undefined,
+              }}
             >
               <div className={styles.sessionInfo}>
                 <Typography size='sm' className={styles.sessionInfoName}>
@@ -61,7 +68,7 @@ export function SessionList(props: SessionListProps) {
                   </Typography>
                 </div>
                 <Typography size='xs'>
-                  {getTurnTimeDescription(session.config.turnTime)}
+                  Время хода: {getTurnTimeDescription(session.config.turnTime)}
                 </Typography>
               </div>
 

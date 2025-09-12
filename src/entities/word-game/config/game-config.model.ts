@@ -7,5 +7,8 @@ export interface GameConfigModel {
   readonly mode: GameMode; // режим игры
   readonly letter?: StartLetter; // если режим SINGLE_LETTER
   readonly checkWords: boolean; // нужна ли проверка слов
-  readonly turnTime: TurnTime; // время хода
+  /**
+   * Возвращает время хода.
+   */
+  readonly turnTime: TurnTime;
 }

@@ -32,10 +32,18 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
   const [isRandomLetter, setIsRandomLetter] = useState(false);
 
   const handleSave = () => {
+    const isSingleLetterMode = mode === GameMode.SINGLE_LETTER;
+
+    const startLetter = isSingleLetterMode
+      ? isRandomLetter
+        ? getRandomStartLetter()
+        : letter
+      : undefined;
+
     const config = {
       mode,
       name: name || defaultGameName,
-      letter: mode === GameMode.SINGLE_LETTER ? letter : undefined,
+      letter: startLetter,
       checkWords,
       turnTime,
     } satisfies GameConfigModel;
@@ -46,11 +54,10 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       usedWords: [],
+      isFinished: false,
     };
     onSave(session);
   };
-
-  const isValidData = !!name;
 
   return (
     <div className={styles.form}>
@@ -68,7 +75,6 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
         <option value={GameMode.LAST_LETTER}>Последняя буква</option>
         <option value={GameMode.SINGLE_LETTER}>Одна буква</option>
       </SelectField>
-
       {mode === GameMode.SINGLE_LETTER && (
         <>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -102,4 +108,13 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       </button>
     </div>
   );
+}
+
+/**
+ * Возвращает случайную букву из перечисления StartLetter.
+ */
+export function getRandomStartLetter(): StartLetter {
+  const values = Object.values(StartLetter);
+  const index = Math.floor(Math.random() * values.length);
+  return values[index];
 }
