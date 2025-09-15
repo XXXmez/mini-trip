@@ -3,7 +3,7 @@
   height: 100%;
   display: grid;
   grid-template-areas: 'header' 'info' 'wordCheck' 'timer' 'inputs' 'status' 'loading' 'clue' 'words';
-  grid-template-rows: min-content min-content min-content 1fr 1fr 30px 30px 1fr 1fr;
+  grid-template-rows: min-content min-content min-content min(80px) auto min-content min-content auto auto;
   gap: 8px;
 
   &Title {
@@ -96,6 +96,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30px;
   }
 
   &Loading {
@@ -103,6 +104,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 30px;
   }
 
   &Clue {

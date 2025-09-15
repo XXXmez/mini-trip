@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { distance } from 'fastest-levenshtein';
 
-import { Button, Modal, Typography } from 'src/shared';
-import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
+import { BottomSheet, Button, Modal, Typography } from 'src/shared';
 import { GameMode, GameSessionModel, nouns, TurnTime } from '../../config';
 
 import styles from './word-game-content.module.scss';
@@ -47,10 +46,9 @@ export function WordGameContent(props: WordGameContentProps) {
 
   const [timeLeft, setTimeLeft] = useState<number | null>(() => initialSeconds);
 
-  // если сессия или конфиг сменились — сбросим таймер на начальное значение
   useEffect(() => {
     setTimeLeft(initialSeconds);
-  }, [session.id, turnTime]); // при смене сессии/времени сбрасываем
+  }, [session.id, turnTime]);
 
   useEffect(() => {
     if (initialSeconds === null) {
@@ -90,7 +88,6 @@ export function WordGameContent(props: WordGameContentProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
 
-  // Set для быстрого поиска точного совпадения
   const dictionarySet = new Set(nouns);
 
   const getExpectedLetter = () => {
@@ -198,92 +195,88 @@ export function WordGameContent(props: WordGameContentProps) {
   const expectedLetter = getExpectedLetter();
 
   return (
-    <div className={styles.wordGameContent}>
-      <div className={styles.wordGameContentTitle}>
-        <Typography size={'xl2'} weight={'bold'}>
-          {session.config.name}
-        </Typography>
-      </div>
-      <div className={styles.wordGameContentInfo}>
-        <div className={styles.wordGameContentInfoBlock}>
-          <Typography size={'sm'} className={styles.wordGameContentInfoLabel}>
-            Режим
+    <>
+      <div className={styles.wordGameContent}>
+        <div className={styles.wordGameContentTitle}>
+          <Typography size={'xl2'} weight={'bold'}>
+            {session.config.name}
           </Typography>
-          <div className={styles.wordGameContentInfoContent}>
-            {mode === GameMode.LAST_LETTER ? (
-              <Typography>Последняя буква</Typography>
-            ) : (
-              <>
-                <Typography>На букву</Typography>
-                <Typography className={styles.wordGameContentInfoLetter}>
-                  {letter}
-                </Typography>
-              </>
-            )}
+        </div>
+        <div className={styles.wordGameContentInfo}>
+          <div className={styles.wordGameContentInfoBlock}>
+            <Typography size={'sm'} className={styles.wordGameContentInfoLabel}>
+              Режим
+            </Typography>
+            <div className={styles.wordGameContentInfoContent}>
+              {mode === GameMode.LAST_LETTER ? (
+                <Typography>Последняя буква</Typography>
+              ) : (
+                <>
+                  <Typography>На букву</Typography>
+                  <Typography className={styles.wordGameContentInfoLetter}>
+                    {letter}
+                  </Typography>
+                </>
+              )}
+            </div>
+          </div>
+          <div className={styles.wordGameContentInfoBlock}>
+            <Typography size={'sm'} className={styles.wordGameContentInfoLabel}>
+              Время хода
+            </Typography>
+            <div className={styles.wordGameContentInfoContent}>
+              <Typography>{getTurnTimeDescription(turnTime)}</Typography>
+            </div>
           </div>
         </div>
-        <div className={styles.wordGameContentInfoBlock}>
-          <Typography size={'sm'} className={styles.wordGameContentInfoLabel}>
-            Время хода
+        <div className={styles.wordGameContentWordCheck}>
+          <Typography>{`Проверка слов ${checkWords ? 'включена' : 'выключена'}`}</Typography>
+        </div>
+        <div className={styles.wordGameContentTimer}>
+          {turnTime !== TurnTime.UNLIMITED && timeLeft && (
+            <div className={styles.wordGameContentTimerWrapper}>
+              <Typography size={'xl5'}>{formatTime(timeLeft)}</Typography>
+            </div>
+          )}
+        </div>
+        <div className={styles.wordGameContentInputs}>
+          <Typography>
+            Последнее слово: {usedWords[usedWords.length - 1] ?? '-'}
           </Typography>
-          <div className={styles.wordGameContentInfoContent}>
-            <Typography>{getTurnTimeDescription(turnTime)}</Typography>
-          </div>
+          <Typography>
+            Следующее слово на:{' '}
+            <span className={styles.nextLetter}>
+              {expectedLetter ? expectedLetter.toUpperCase() : '-'}
+            </span>
+          </Typography>
+          <InputField
+            placeholder={'Введите слово'}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <Button onClick={handleSubmit} disabled={loading}>
+            Отправить
+          </Button>
+        </div>
+        <div className={styles.wordGameContentStatus}>
+          {message && <Typography>{message}</Typography>}
+        </div>
+        <div className={styles.wordGameContentLoading}>
+          {loading && <div>⏳ Проверяем слово...</div>}
+        </div>
+        <div className={styles.wordGameContentClue}>
+          <Button onClick={() => setHintOpen(true)} disabled={loading}>
+            Подсказка
+          </Button>
+        </div>
+        <div className={styles.wordGameContentWords}>
+          <Typography>Использовано слов: {usedWords.length}</Typography>
+          <Button onClick={() => setModalOpen(true)} disabled={loading}>
+            Просмотреть все
+          </Button>
         </div>
       </div>
-      <div className={styles.wordGameContentWordCheck}>
-        <Typography>{`Проверка слов ${checkWords ? 'включена' : 'выключена'}`}</Typography>
-      </div>
-      <div className={styles.wordGameContentTimer}>
-        {turnTime !== TurnTime.UNLIMITED && timeLeft && (
-          <div className={styles.wordGameContentTimerWrapper}>
-            <Typography size={'xl5'}>{formatTime(timeLeft)}</Typography>
-          </div>
-        )}
-      </div>
-      <div className={styles.wordGameContentInputs}>
-        <Typography>
-          Последнее слово: {usedWords[usedWords.length - 1] ?? '-'}
-        </Typography>
-        <Typography>
-          Следующее слово на:{' '}
-          <span className={styles.nextLetter}>
-            {expectedLetter ? expectedLetter.toUpperCase() : '-'}
-          </span>
-        </Typography>
-        <InputField
-          placeholder={'Введите слово'}
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <Button onClick={handleSubmit} disabled={loading}>
-          Отправить
-        </Button>
-      </div>
-      <div className={styles.wordGameContentStatus}>
-        {message && <Typography>{message}</Typography>}
-      </div>
-      <div className={styles.wordGameContentLoading}>
-        {loading && <div>⏳ Проверяем слово...</div>}
-      </div>
-      <div className={styles.wordGameContentClue}>
-        <Button onClick={() => setHintOpen(true)} disabled={true}>
-          Подсказка
-        </Button>
-      </div>
-      <div className={styles.wordGameContentWords}>
-        <Typography>Использовано слов: {usedWords.length}</Typography>
-        <Button onClick={() => setModalOpen(true)} disabled={loading}>
-          Просмотреть все
-        </Button>
-      </div>
-
-      <Modal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title='Все введённые слова'
-        maxWidth='400px'
-      >
+      <BottomSheet open={modalOpen} onClose={() => setModalOpen(false)}>
         {usedWords.length === 0 ? (
           <p>Пока нет слов</p>
         ) : (
@@ -295,18 +288,18 @@ export function WordGameContent(props: WordGameContentProps) {
               flexWrap: 'wrap',
             }}
           >
-            {Array.from(usedWords).map((word) => (
+            {usedWords.map((word) => (
               <Typography key={word}>{word}</Typography>
             ))}
           </div>
         )}
-      </Modal>
+      </BottomSheet>
       <WordHintDialog
         session={session}
         open={hintOpen}
         onClose={() => setHintOpen(false)}
       />
-    </div>
+    </>
   );
 }
 
@@ -327,31 +320,71 @@ function getExpectedLetter(session: GameSessionModel): string | undefined {
   return undefined;
 }
 
+// helper: маскируем слово, первая буква всегда видна
 function maskWord(word: string): string {
-  const len = word.length;
-  let hideCount = 1;
-  if (len >= 5 && len <= 6) hideCount = 2;
-  else if (len >= 7 && len <= 9) hideCount = 3;
-  else if (len >= 10) hideCount = 4;
+  if (!word) return word;
 
-  const indices = new Set<number>();
-  while (indices.size < hideCount) {
-    const idx = Math.floor(Math.random() * len);
-    indices.add(idx);
+  const len = word.length;
+
+  // определяем количество скрываемых букв в зависимости от длины
+  let hideCount: number;
+  if (len <= 5) hideCount = 1;
+  else if (len <= 8) hideCount = 2;
+  else if (len <= 11) hideCount = 3;
+  else hideCount = 4;
+
+  // ограничения
+  hideCount = Math.max(1, Math.min(4, hideCount));
+  hideCount = Math.min(hideCount, Math.max(0, len - 1)); // никогда не скрываем все символы
+
+  // собираем индексы, которые можно скрывать (исключаем индекс 0 и не-letters)
+  const hideableIndices: number[] = [];
+  const letterRe = /[а-яё]/i; // кириллическая буква (учитывает ё)
+  for (let i = 1; i < len; i++) {
+    if (letterRe.test(word[i])) hideableIndices.push(i);
   }
 
+  // если не нашлось ни одного hideable (напр. слово односимвольное или только не-буквы),
+  // тогда ничего не маскируем
+  if (hideableIndices.length === 0) return word;
+
+  // корректируем hideCount если доступных индексов меньше
+  hideCount = Math.min(hideCount, hideableIndices.length);
+
+  // выбираем уникальные случайные индексы из hideableIndices
+  const chosen = new Set<number>();
+  while (chosen.size < hideCount) {
+    const idx =
+      hideableIndices[Math.floor(Math.random() * hideableIndices.length)];
+    chosen.add(idx);
+  }
+
+  // формируем строку с подчёркиваниями вместо спрятанных букв
   return word
     .split('')
-    .map((ch, i) => (indices.has(i) ? '_' : ch))
+    .map((ch, i) => (chosen.has(i) ? '_' : ch))
     .join('');
 }
 
+// helper: выбрать случайное слово с учётом режима и ожидаемой буквы
 function getRandomWord(session: GameSessionModel): string | null {
-  const expected = getExpectedLetter(session);
-  const dict = expected ? nouns.filter((w) => w.startsWith(expected)) : nouns;
+  const expected = getExpectedLetter(session); // у тебя уже есть эта функция
+  const expectedNormalized = expected ? expected.toLowerCase() : undefined;
 
-  if (dict.length === 0) return null;
-  return dict[Math.floor(Math.random() * dict.length)];
+  // фильтруем словарь по начальной букве если она есть
+  let candidates = expectedNormalized
+    ? nouns.filter((w) => w.startsWith(expectedNormalized))
+    : nouns.slice();
+
+  if (candidates.length === 0) return null;
+
+  // предпочитаем неиспользованные слова
+  const unused = candidates.filter((w) => !session.usedWords.includes(w));
+
+  const pool = unused.length > 0 ? unused : candidates;
+
+  // возвращаем случайное слово из pool
+  return pool[Math.floor(Math.random() * pool.length)];
 }
 
 interface WordHintProps {
@@ -361,15 +394,22 @@ interface WordHintProps {
 }
 
 export function WordHintDialog({ session, open, onClose }: WordHintProps) {
-  const [hintWord, setHintWord] = useState<string | null>(() =>
-    getRandomWord(session),
-  );
+  const [hintWord, setHintWord] = useState<string | null>(null);
+
+  // когда диалог открывается — очищаем предыдущее слово
+  useEffect(() => {
+    if (open) {
+      setHintWord(null);
+    }
+  }, [open, session.id]);
 
   const handleReshuffle = () => {
     setHintWord(getRandomWord(session));
   };
 
-  const masked = hintWord ? maskWord(hintWord) : 'Нет доступных слов';
+  const masked = hintWord
+    ? maskWord(hintWord)
+    : 'Нажмите «Переподобрать», чтобы получить подсказку';
 
   return (
     <Modal isOpen={open} onClose={onClose} title='Подсказка' maxWidth='400px'>

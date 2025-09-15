@@ -1,0 +1,42 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none; // клики проходят мимо, пока не открыт
+
+  &.open {
+    pointer-events: auto;
+  }
+}
+
+.sheet {
+  width: 100%;
+  min-height: min(400px, 100vh); // 👈 минимум 400px, но не больше экрана
+  max-height: 75vh;              // 👈 максимум 75% высоты экрана
+  background: var(--bg-color);
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.25s ease;
+  will-change: transform;
+}
+
+.handle {
+  width: 40px;
+  height: 5px;
+  background: #ccc;
+  border-radius: 3px;
+  margin: 8px auto;
+}
+
+.content {
+  flex: 1;
+  overflow-y: auto; // 👈 скролл только внутри
+  padding: 16px;
+}

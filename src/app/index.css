@@ -20,10 +20,14 @@
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   width: 100%;
   height: 100vh;
+}
+
+html, body, #root {
+  overflow: hidden; /* 🔒 отключает скролл */
+  overscroll-behavior: none; /* 🔒 убирает "подёргивание" на iOS/Android */
 }
