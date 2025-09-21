@@ -2,6 +2,7 @@
   --bg-color: #ffffff;
   --text-color: #000000;
   --primary-color: #4caf50;
+  --bottom-sheet-shadow: inset 0 5px 20px 0 rgb(0 0 0 / 10%);
 }
 
 /* Светлая */
@@ -9,6 +10,7 @@
   --bg-color: #ffffff;
   --text-color: #000000;
   --primary-color: #4caf50;
+  --bottom-sheet-shadow: inset 0 5px 20px 0 rgb(0 0 0 / 10%);
 }
 
 /* Тёмная */
@@ -16,6 +18,7 @@
   --bg-color: #121212;
   --text-color: #ffffff;
   --primary-color: #bb86fc;
+  --bottom-sheet-shadow: inset 0 5px 20px 0 rgb(255 255 255 / 10%);
 }
 
 /* Тёмно-зелёная */
@@ -23,4 +26,5 @@
   --bg-color: #0d1a0f;
   --text-color: #e0f2e9;
   --primary-color: #2e7d32;
+  --bottom-sheet-shadow: inset 0 5px 20px 0 rgb(255 255 255 / 10%);
 }

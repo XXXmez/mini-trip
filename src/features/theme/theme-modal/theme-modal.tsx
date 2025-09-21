@@ -32,7 +32,7 @@ export function ThemeModal({ isOpen, onClose }: ThemeModalProps) {
       isOpen={isOpen}
       onClose={onClose}
       title='Выберите тему'
-      maxWidth='400px'
+      maxWidth='300px'
     >
       <div className={styles.themeList}>
         {themes.map((theme) => (

@@ -1,4 +1,4 @@
-import { ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
+import { Button, ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
 import { Typography } from 'src/shared/ui/typography';
 import { Header } from 'src/shared/ui/header';
 import { GameSessionModel } from 'src/entities/word-game/config';
@@ -21,9 +21,9 @@ export function SessionList(props: SessionListProps) {
 
   return (
     <div className={styles.sessionList}>
-      <button onClick={onNewGame} className={styles.newGameBtn}>
+      <Button onClick={onNewGame} className={styles.newGameBtn}>
         Новая игра
-      </button>
+      </Button>
 
       <Header
         left={<span className={styles.saveTitle}>Сохранения</span>}
