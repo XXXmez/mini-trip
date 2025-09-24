@@ -1,4 +1,40 @@
 .wordHintDialog {
-  display: grid;
-  grid-template-rows: 150px min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px 24px;
+
+  .textContent {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--primary-color);
+    padding: 4px;
+
+    background:
+            color-mix(in srgb, var(--primary-color) 20%, transparent);
+    backdrop-filter: blur(10px) saturate(100%);
+    -webkit-backdrop-filter: blur(10px) saturate(100%);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .text {
+    text-align: center;
+  }
+
+  .btn {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Modal } from 'src/shared';
-import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
+import { useLocalStorage } from 'src/shared';
 
 import styles from './theme-modal.module.scss';
 

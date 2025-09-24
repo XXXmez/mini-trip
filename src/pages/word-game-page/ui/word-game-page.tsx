@@ -1,5 +1,5 @@
 import styles from './word-game-page.module.scss';
-import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
+import { useLocalStorage } from 'src/shared';
 import {
   GameConfigModel,
   GameMode,

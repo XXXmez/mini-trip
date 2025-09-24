@@ -20,8 +20,10 @@ const updateSW = registerSW({
 function App() {
   useEffect(() => {
     const theme = localStorage.getItem('app-theme');
-    const storedTheme = theme ? JSON.parse(theme) : 'theme-light';
-    document.documentElement.className = storedTheme;
+
+    document.documentElement.className = theme
+      ? (JSON.parse(theme) as string)
+      : 'theme-light';
   }, []);
 
   return (

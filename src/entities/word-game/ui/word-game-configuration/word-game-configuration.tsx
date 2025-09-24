@@ -113,7 +113,7 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
 /**
  * Возвращает случайную букву из перечисления StartLetter.
  */
-export function getRandomStartLetter(): StartLetter {
+function getRandomStartLetter(): StartLetter {
   const values = Object.values(StartLetter);
   const index = Math.floor(Math.random() * values.length);
   return values[index];

@@ -35,10 +35,15 @@ export function WordHintDialog({ session, open, onClose }: WordHintProps) {
   return (
     <BottomSheet open={open} onClose={onClose}>
       <div className={styles.wordHintDialog}>
-        <div style={{ textAlign: 'center' }}>
-          <Typography size='xl2'>{masked}</Typography>
+        <div className={styles.textContent}>
+          <Typography size='xl2' className={styles.text}>
+            {masked}
+          </Typography>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          className={styles.btn}
+          style={{ display: 'flex', justifyContent: 'center' }}
+        >
           <Button onClick={handleReshuffle}>Обновить</Button>
         </div>
       </div>
