@@ -29,7 +29,7 @@ export function WordGameContent(props: WordGameContentProps) {
   const { session, onFinish, onAddWord } = props;
 
   const { id: sessionId, config, usedWords } = session;
-  const { letter, mode, turnTime, checkWords } = config;
+  const { letter, mode, turnTime, checkWords, hintsEnabled } = config;
 
   const getInitialSeconds = (t: TurnTime): number | null => {
     switch (t) {

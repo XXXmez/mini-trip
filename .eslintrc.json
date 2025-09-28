@@ -53,6 +53,9 @@
     // удаление неиспользуемых импортов
     "unused-imports/no-unused-imports": "error",
 
+    // обнаружение циклических импортов
+    "import/no-cycle": ["error", { "maxDepth": 1 }],
+
     // другие правила
     "@typescript-eslint/no-unused-vars": [
       "error",

@@ -32,6 +32,7 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
   const [letter, setLetter] = useState<StartLetter>(StartLetter.A);
   const [checkWords, setCheckWords] = useState(false);
   const [isRandomLetter, setIsRandomLetter] = useState(false);
+  const [hintsEnabled, setHintsEnabled] = useState(false);
 
   const handleSave = () => {
     const isSingleLetterMode = mode === GameMode.SINGLE_LETTER;
@@ -47,6 +48,7 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       name: name || defaultGameName,
       letter: startLetter,
       checkWords,
+      hintsEnabled,
       turnTime,
     } satisfies GameConfigModel;
 
@@ -104,6 +106,10 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
         <Switch checked={checkWords} onChange={setCheckWords} />
         <Typography>Проверять слова</Typography>
+      </div>
+      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <Switch checked={hintsEnabled} onChange={setHintsEnabled} />
+        <Typography>Подсказки</Typography>
       </div>
       <button onClick={handleSave} className={styles.button}>
         <Typography>Начать игру</Typography>

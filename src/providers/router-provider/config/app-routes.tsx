@@ -1,13 +1,9 @@
-import { HomePage, WordGamePage } from 'src/pages';
+import { HomePage } from 'src/pages';
 import { AppRouteModel } from 'src/providers';
 
+import { gameRoutes } from './game-routes';
+
 export const appRoutes: AppRouteModel[] = [
-  {
-    path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/word-game',
-    element: <WordGamePage />,
-  },
-] as const satisfies AppRouteModel[];
+  { path: '/', element: <HomePage /> },
+  ...gameRoutes,
+];

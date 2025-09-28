@@ -23,6 +23,10 @@ export interface GameConfigModel {
    */
   readonly checkWords: boolean;
   /**
+   * Возвращает признак необходимости подсказок.
+   */
+  readonly hintsEnabled: boolean;
+  /**
    * Возвращает время хода.
    */
   readonly turnTime: TurnTime;
