@@ -1,11 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import styles from './bottom-sheet.module.scss';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-interface BottomSheetProps {
+import { ChildrenProps } from 'src/shared';
+
+import styles from './bottom-sheet.module.scss';
+
+interface BottomSheetProps extends ChildrenProps {
   readonly open: boolean;
   readonly onClose: () => void;
-  readonly children: React.ReactNode;
   /**
    * Порог закрытия в пикселях (опционально). По умолчанию: max(100, 0.25 * sheetHeight).
    */
@@ -88,7 +90,6 @@ export function BottomSheet({
         sheetRef.current &&
         'setPointerCapture' in sheetRef.current
       ) {
-        // @ts-ignore
         sheetRef.current.setPointerCapture(pointerId);
       } else if (setPointerCapture && pointerId !== undefined) {
         setPointerCapture(pointerId);
@@ -98,64 +99,72 @@ export function BottomSheet({
     }
   };
 
-  const moveDragging = (clientY: number) => {
+  const moveDragging = useCallback((clientY: number) => {
     if (!draggingRef.current) return;
     const delta = Math.max(0, clientY - startYRef.current);
     lastDeltaRef.current = delta;
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => applyTranslate(delta));
-  };
+  }, []);
 
-  const endDragging = (releasePointerId?: number) => {
-    if (!draggingRef.current) return;
-    draggingRef.current = false;
+  const endDragging = useCallback(
+    (releasePointerId?: number) => {
+      if (!draggingRef.current) return;
+      draggingRef.current = false;
 
-    // threshold: max(100px, 25% sheet height) or provided closeThresholdPx
-    const sheetHeight =
-      sheetRef.current?.getBoundingClientRect().height ?? window.innerHeight;
-    const defaultThreshold = Math.max(100, Math.round(sheetHeight * 0.25));
-    const threshold =
-      typeof closeThresholdPx === 'number'
-        ? closeThresholdPx
-        : defaultThreshold;
+      // threshold: max(100px, 25% sheet height) or provided closeThresholdPx
+      const sheetHeight =
+        sheetRef.current?.getBoundingClientRect().height ?? window.innerHeight;
+      const defaultThreshold = Math.max(100, Math.round(sheetHeight * 0.25));
+      const threshold =
+        typeof closeThresholdPx === 'number'
+          ? closeThresholdPx
+          : defaultThreshold;
 
-    // restore transition
-    if (sheetRef.current)
-      sheetRef.current.style.transition =
-        'transform 220ms cubic-bezier(.22,.9,.3,1)';
-
-    if (lastDeltaRef.current >= threshold) {
-      // animate out
+      // restore transition
       if (sheetRef.current)
-        sheetRef.current.style.transform = `translateY(100%)`;
-      // wait until transition ends then onClose
-      const onTransitionEnd = () => {
-        sheetRef.current?.removeEventListener('transitionend', onTransitionEnd);
-        onClose();
-      };
-      sheetRef.current?.addEventListener('transitionend', onTransitionEnd);
-    } else {
-      // animate back to 0
-      if (sheetRef.current) sheetRef.current.style.transform = `translateY(0)`;
-    }
+        sheetRef.current.style.transition =
+          'transform 220ms cubic-bezier(.22,.9,.3,1)';
 
-    // release pointer capture if needed
-    try {
-      if (
-        releasePointerId !== undefined &&
-        sheetRef.current &&
-        'releasePointerCapture' in sheetRef.current
-      ) {
-        // @ts-ignore
-        sheetRef.current.releasePointerCapture(releasePointerId);
+      if (lastDeltaRef.current >= threshold) {
+        // animate out
+        if (sheetRef.current)
+          sheetRef.current.style.transform = `translateY(100%)`;
+        // wait until transition ends then onClose
+        const onTransitionEnd = () => {
+          sheetRef.current?.removeEventListener(
+            'transitionend',
+            onTransitionEnd,
+          );
+          onClose();
+        };
+        sheetRef.current?.addEventListener('transitionend', onTransitionEnd);
+      } else {
+        // animate back to 0
+        if (sheetRef.current)
+          sheetRef.current.style.transform = `translateY(0)`;
       }
-    } catch {}
-    lastDeltaRef.current = 0;
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-      rafRef.current = null;
-    }
-  };
+
+      // release pointer capture if needed
+      try {
+        if (
+          releasePointerId !== undefined &&
+          sheetRef.current &&
+          'releasePointerCapture' in sheetRef.current
+        ) {
+          sheetRef.current.releasePointerCapture(releasePointerId);
+        }
+      } catch {
+        console.log('error', releasePointerId);
+      }
+      lastDeltaRef.current = 0;
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    },
+    [closeThresholdPx, onClose],
+  );
 
   // pointer events (preferred)
   const supportsPointer =
@@ -185,15 +194,23 @@ export function BottomSheet({
     [open],
   );
 
-  const onPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!draggingRef.current) return;
-    moveDragging(e.clientY);
-  }, []);
+  const onPointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!draggingRef.current) {
+        return;
+      }
+      moveDragging(e.clientY);
+    },
+    [moveDragging],
+  );
 
-  const onPointerUp = useCallback((e: React.PointerEvent) => {
-    if (!draggingRef.current) return;
-    endDragging(e.pointerId);
-  }, []);
+  const onPointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (!draggingRef.current) return;
+      endDragging(e.pointerId);
+    },
+    [endDragging],
+  );
 
   // Touch fallback (if PointerEvent not supported)
   const onTouchStart = useCallback(
@@ -211,23 +228,32 @@ export function BottomSheet({
     [open],
   );
 
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!draggingRef.current) return;
-    const touch = e.touches[0];
-    // prevent page scroll while dragging
-    e.preventDefault();
-    moveDragging(touch.clientY);
-  }, []);
+  const onTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (!draggingRef.current) {
+        return;
+      }
+      const touch = e.touches[0];
+      // prevent page scroll while dragging
+      e.preventDefault();
+      moveDragging(touch.clientY);
+    },
+    [moveDragging],
+  );
 
   const onTouchEnd = useCallback(() => {
-    if (!draggingRef.current) return;
+    if (!draggingRef.current) {
+      return;
+    }
     endDragging();
-  }, []);
+  }, [endDragging]);
 
   // клик вне — закрываем; при клике в overlay, если target === overlayRef
   const onOverlayPointerDown = useCallback(
     (e: React.PointerEvent) => {
-      if (!overlayRef.current) return;
+      if (!overlayRef.current) {
+        return;
+      }
       if (e.target === overlayRef.current) {
         onClose();
       }
@@ -237,7 +263,9 @@ export function BottomSheet({
 
   const onOverlayMouseDown = useCallback(
     (e: React.MouseEvent) => {
-      if (!overlayRef.current) return;
+      if (!overlayRef.current) {
+        return;
+      }
       if (e.target === overlayRef.current) {
         onClose();
       }

@@ -1,6 +1,8 @@
 import { SelectHTMLAttributes } from 'react';
-import styles from './select-field.module.scss';
+
 import { Typography } from 'src/shared';
+
+import styles from './select-field.module.scss';
 
 interface SelectFieldProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;

@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Header, IconButton, Setting } from 'src/shared';
 import { ThemeModal } from 'src/features';
+import { Header, IconButton, Setting } from 'src/shared';
 
 import styles from './home-page.module.scss';
 

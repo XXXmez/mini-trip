@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { distance } from 'fastest-levenshtein';
 
-import { Button, Typography } from 'src/shared';
-import { GameMode, GameSessionModel, nouns, TurnTime } from '../../config';
-
-import { getTurnTimeDescription } from 'src/pages/word-game-page/ui/word-game-page.tsx';
-import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
 import { UsedWordsSheet, WordHintDialog } from 'src/features';
+import { getTurnTimeDescription } from 'src/pages/word-game-page/ui/word-game-page.tsx';
+import { Button, Typography } from 'src/shared';
+import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
+
+import { GameMode, GameSessionModel, nouns, TurnTime } from '../../config';
 
 import styles from './word-game-content.module.scss';
 
@@ -26,7 +26,7 @@ interface WordGameContentProps {
 }
 
 export function WordGameContent(props: WordGameContentProps) {
-  const { session, onExit, onFinish, onAddWord } = props;
+  const { session, onFinish, onAddWord } = props;
 
   const { id: sessionId, config, usedWords } = session;
   const { letter, mode, turnTime, checkWords } = config;
@@ -50,7 +50,7 @@ export function WordGameContent(props: WordGameContentProps) {
 
   useEffect(() => {
     setTimeLeft(initialSeconds);
-  }, [session.id, turnTime]);
+  }, [initialSeconds]);
 
   useEffect(() => {
     if (initialSeconds === null) {

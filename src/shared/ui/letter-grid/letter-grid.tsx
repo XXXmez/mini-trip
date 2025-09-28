@@ -1,6 +1,8 @@
 import { FC } from 'react';
-import styles from './letter-grid.module.scss';
+
 import { StartLetter } from 'src/entities/word-game/config';
+
+import styles from './letter-grid.module.scss';
 
 interface LetterGridProps {
   readonly value: StartLetter;

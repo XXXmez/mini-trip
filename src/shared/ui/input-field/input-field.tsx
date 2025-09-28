@@ -1,6 +1,8 @@
 import { InputHTMLAttributes } from 'react';
-import styles from './input-field.module.scss';
+
 import { Typography } from 'src/shared';
+
+import styles from './input-field.module.scss';
 
 interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;

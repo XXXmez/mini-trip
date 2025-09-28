@@ -1,9 +1,10 @@
+import { useEffect, useState } from 'react';
+
 import {
   GameMode,
   GameSessionModel,
   nouns,
 } from 'src/entities/word-game/config';
-import { useEffect, useState } from 'react';
 import { BottomSheet, Button, Typography } from 'src/shared';
 
 import styles from './word-hint-dialog.module.scss';
@@ -120,7 +121,7 @@ function getRandomWord(session: GameSessionModel): string | null {
   const expectedNormalized = expected ? expected.toLowerCase() : undefined;
 
   // фильтруем словарь по начальной букве если она есть
-  let candidates = expectedNormalized
+  const candidates = expectedNormalized
     ? nouns.filter((w) => w.startsWith(expectedNormalized))
     : nouns.slice();
 

@@ -27,7 +27,9 @@ body {
   height: 100vh;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   overflow: hidden; /* 🔒 отключает скролл */
   overscroll-behavior: none; /* 🔒 убирает "подёргивание" на iOS/Android */
 }

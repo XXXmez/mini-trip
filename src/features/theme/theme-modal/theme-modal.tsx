@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { Modal } from 'src/shared';
-import { useLocalStorage } from 'src/shared';
+import { useEffect, useState } from 'react';
+
+import { Modal, useLocalStorage } from 'src/shared';
 
 import styles from './theme-modal.module.scss';
 
@@ -25,7 +25,7 @@ export function ThemeModal({ isOpen, onClose }: ThemeModalProps) {
   useEffect(() => {
     document.documentElement.className = selected;
     setStoredTheme(selected);
-  }, [selected]);
+  }, [selected, setStoredTheme]);
 
   return (
     <Modal

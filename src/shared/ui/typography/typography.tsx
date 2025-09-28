@@ -1,5 +1,6 @@
-import { ReactNode } from 'react';
 import classNames from 'classnames';
+
+import { ChildrenProps } from 'src/shared';
 
 import styles from './typography.module.scss';
 
@@ -18,8 +19,7 @@ export type TextSize =
 export type TextWeight = 'normal' | 'medium' | 'bold';
 export type As = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
 
-interface TypographyProps {
-  readonly children: ReactNode;
+interface TypographyProps extends ChildrenProps {
   readonly size?: TextSize;
   readonly className?: string;
   readonly weight?: TextWeight;

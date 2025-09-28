@@ -1,11 +1,11 @@
-import { Button, ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
-import { Typography } from 'src/shared/ui/typography';
-import { Header } from 'src/shared/ui/header';
 import { GameSessionModel } from 'src/entities/word-game/config';
 import {
   getGameConfigDescription,
   getTurnTimeDescription,
 } from 'src/pages/word-game-page/ui/word-game-page.tsx';
+import { Button, ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
+import { Header } from 'src/shared/ui/header';
+import { Typography } from 'src/shared/ui/typography';
 
 import styles from './session-list.module.scss';
 

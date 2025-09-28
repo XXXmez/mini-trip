@@ -1,5 +1,5 @@
-import styles from './word-game-configuration.module.scss';
-import React, { useState } from 'react';
+import { useState } from 'react';
+
 import {
   GameConfigModel,
   GameMode,
@@ -8,11 +8,13 @@ import {
   TurnTime,
   TurnTimeLabels,
 } from 'src/entities/word-game/config';
-import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
-import { SelectField } from 'src/shared/ui/select-field/select-field.tsx';
-import { LetterGrid } from 'src/shared/ui/letter-grid';
-import { Switch } from 'src/shared/ui/switch';
 import { Typography } from 'src/shared';
+import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
+import { LetterGrid } from 'src/shared/ui/letter-grid';
+import { SelectField } from 'src/shared/ui/select-field/select-field.tsx';
+import { Switch } from 'src/shared/ui/switch';
+
+import styles from './word-game-configuration.module.scss';
 
 interface WordGameConfigurationProps {
   readonly sessions: GameSessionModel[];

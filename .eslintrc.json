@@ -22,10 +22,38 @@
   ],
   "rules": {
     "prettier/prettier": "error",
+
+    // отключаем import/order, чтобы не конфликтовал с simple-import-sort
     "import/order": "off",
-    "simple-import-sort/imports": "error",
+
+    // сортировка импортов
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          // 1. встроенные модули node
+          ["^node:", "^fs$", "^path$", "^os$"],
+
+          // 2. внешние пакеты
+          ["^react$", "^@?\\w"],
+
+          // 3. внутренние алиасы src/**
+          ["^src/"],
+
+          // 4. относительные импорты
+          ["^\\.\\.(?!/?$)", "^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+
+          // 5. стили в конце
+          ["^.+\\.s?css$"]
+        ]
+      }
+    ],
     "simple-import-sort/exports": "error",
+
+    // удаление неиспользуемых импортов
     "unused-imports/no-unused-imports": "error",
+
+    // другие правила
     "@typescript-eslint/no-unused-vars": [
       "error",
       { "argsIgnorePattern": "^_" }
@@ -43,7 +71,17 @@
         "project": "./tsconfig.json"
       },
       "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx", ".d.ts", ".json", ".css", ".svg"]
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx",
+          ".d.ts",
+          ".json",
+          ".css",
+          ".scss",
+          ".svg"
+        ]
       }
     }
   }

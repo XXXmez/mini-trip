@@ -1,5 +1,6 @@
-import styles from './word-game-page.module.scss';
-import { useLocalStorage } from 'src/shared';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
   GameConfigModel,
   GameMode,
@@ -7,12 +8,17 @@ import {
   TurnTime,
   TurnTimeLabels,
 } from 'src/entities/word-game/config';
-import { useState } from 'react';
 import { WordGameConfiguration } from 'src/entities/word-game/ui/word-game-configuration/word-game-configuration.tsx';
 import { WordGameContent } from 'src/entities/word-game/ui/word-game-content/word-game-content.tsx';
-import { ChevronLeftIcon, Header, IconButton } from 'src/shared';
-import { useNavigate } from 'react-router-dom';
 import { SessionList } from 'src/features';
+import {
+  ChevronLeftIcon,
+  Header,
+  IconButton,
+  useLocalStorage,
+} from 'src/shared';
+
+import styles from './word-game-page.module.scss';
 
 const keyGame = 'word-game-sessions';
 
@@ -108,7 +114,7 @@ export function WordGamePage() {
           />
         )}
 
-        {screen === 'config' && (
+        {screen === GameScreen.CONFIG && (
           <WordGameConfiguration
             sessions={sessions}
             onSave={(session) => {
@@ -119,7 +125,7 @@ export function WordGamePage() {
           />
         )}
 
-        {screen === 'game' && activeSession && (
+        {screen === GameScreen.GAME && activeSession && (
           <WordGameContent
             session={activeSession}
             onExit={() => setScreen(GameScreen.LIST)}
