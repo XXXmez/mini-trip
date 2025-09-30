@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { distance } from 'fastest-levenshtein';
 
 import { UsedWordsSheet, WordHintDialog } from 'src/features';
-import { getTurnTimeDescription } from 'src/pages/word-game-page/ui/word-game-page.tsx';
+import { getTurnTimeDescription } from 'src/pages';
 import { Button, Typography } from 'src/shared';
 import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
 

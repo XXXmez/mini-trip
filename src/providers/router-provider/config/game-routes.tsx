@@ -1,4 +1,4 @@
-import { WordGamePage } from 'src/pages';
+import { CarNumbersGamePage, WordGamePage } from 'src/pages';
 import { GameRouteModel } from 'src/providers';
 
 export const gameRoutes: GameRouteModel[] = [
@@ -10,8 +10,8 @@ export const gameRoutes: GameRouteModel[] = [
       'Добавляй слова одно за другим и проверяй, насколько длинной получится цепочка.',
   },
   {
-    path: '/car-numbers',
-    element: <div>TODO: Car numbers</div>,
+    path: '/car-numbers-game',
+    element: <CarNumbersGamePage />,
     name: 'Охота за номерами',
     description: 'Охоться за номерами от 001 до 999 и не упусти ни одного!',
   },

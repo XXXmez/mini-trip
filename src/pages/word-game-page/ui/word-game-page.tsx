@@ -1,15 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import {
-  GameConfigModel,
-  GameMode,
-  GameSessionModel,
-  TurnTime,
-  TurnTimeLabels,
-} from 'src/entities/word-game/config';
+import { WordGameContent } from 'src/entities/word-game';
+import { GameSessionModel } from 'src/entities/word-game/config';
 import { WordGameConfiguration } from 'src/entities/word-game/ui/word-game-configuration/word-game-configuration.tsx';
-import { WordGameContent } from 'src/entities/word-game/ui/word-game-content/word-game-content.tsx';
 import { SessionList } from 'src/features';
 import {
   ChevronLeftIcon,
@@ -136,27 +130,4 @@ export function WordGamePage() {
       </div>
     </div>
   );
-}
-
-/**
- * Преобразует конфигурацию игры в человеко-читаемое описание.
- */
-export function getGameConfigDescription(config: GameConfigModel): string {
-  switch (config.mode) {
-    case GameMode.SINGLE_LETTER:
-      return `Режим: На букву «${config.letter?.toUpperCase()}»`;
-
-    case GameMode.LAST_LETTER:
-      return 'Режим: Последняя буква';
-
-    default:
-      return 'Режим: Неизвестно';
-  }
-}
-
-/**
- * Преобразует ограничение времени в человеко-читаемое описание.
- */
-export function getTurnTimeDescription(turnTime: TurnTime): string {
-  return `${TurnTimeLabels[turnTime]}`;
 }

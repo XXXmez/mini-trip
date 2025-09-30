@@ -1,1 +1,2 @@
-export { WordGamePage } from './ui/word-game-page';
+export * from './ui';
+export * from './utils';
