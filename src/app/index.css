@@ -32,4 +32,5 @@ body,
 #root {
   overflow: hidden; /* 🔒 отключает скролл */
   overscroll-behavior: none; /* 🔒 убирает "подёргивание" на iOS/Android */
+  overscroll-behavior-x: none; /* запретить горизонтальный overscroll */
 }
