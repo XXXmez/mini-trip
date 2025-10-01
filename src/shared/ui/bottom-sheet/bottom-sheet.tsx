@@ -174,7 +174,19 @@ export function BottomSheet({
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
       if (!open) return;
-      // старт драгa только с ручки или если контент вверху
+
+      const targetEl = e.target as HTMLElement | null;
+
+      if (
+        targetEl &&
+        targetEl.closest &&
+        targetEl.closest(
+          'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+        )
+      ) {
+        return;
+      }
+
       const target = e.target as Node;
       const handleElem = handleRef.current;
       const contentElem = contentRef.current;
@@ -216,6 +228,19 @@ export function BottomSheet({
   const onTouchStart = useCallback(
     (e: React.TouchEvent) => {
       if (!open) return;
+
+      const targetEl = e.target as HTMLElement | null;
+
+      if (
+        targetEl &&
+        targetEl.closest &&
+        targetEl.closest(
+          'button, a, input, textarea, select, [role="button"], [contenteditable="true"]',
+        )
+      ) {
+        return;
+      }
+
       const touch = e.touches[0];
       const target = e.target as Node;
       const handleElem = handleRef.current;

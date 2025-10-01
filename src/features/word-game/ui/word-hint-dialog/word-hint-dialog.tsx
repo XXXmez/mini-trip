@@ -40,7 +40,13 @@ export function WordHintDialog({ session, open, onClose }: WordHintProps) {
           className={styles.btn}
           style={{ display: 'flex', justifyContent: 'center' }}
         >
-          <Button onClick={handleReshuffle}>Обновить</Button>
+          <Button
+            onClick={() => {
+              handleReshuffle();
+            }}
+          >
+            Обновить
+          </Button>
         </div>
       </div>
     </BottomSheet>
