@@ -1,4 +1,4 @@
-import { GameConfigModel } from './game-config.model';
+import { GameConfigModel } from './game-config-model';
 
 export interface GameSessionModel {
   /**

@@ -7,17 +7,14 @@
     "init": "npm install",
     "dev": "vite",
     "dev:host": "vite --host",
-
     "build": "vite build",
     "build:ci": "vite build && tsc --noEmit",
     "preview": "vite preview",
-
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "type-check": "tsc --noEmit",
     "check": "npm run format && npm run lint && npm run type-check",
-
     "clean": "rimraf node_modules dist .turbo .vite",
     "prepare": "husky install"
   },
@@ -48,12 +45,13 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^4.2.0",
     "globals": "^15.12.0",
+    "husky": "^9.1.7",
     "prettier": "^3.3.3",
     "prettier-plugin-css-order": "^2.1.2",
     "sass": "^1.86.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.24.1",
-    "vite": "^5.4.10",
+    "vite": "^7.1.5",
     "vite-plugin-pwa": "^1.0.3"
   },
   "lint-staged": {
