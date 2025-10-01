@@ -4,6 +4,7 @@ import {
   ServiceWorkerProvider,
   ThemeProvider,
 } from 'providers';
+import { Typography } from 'shared/ui';
 
 import './App.css';
 import './styles/themes.scss';
@@ -27,14 +28,28 @@ function App() {
     return () => document.removeEventListener('touchstart', handler);
   }, []);
 
+  function isInStandaloneMode() {
+    return (
+      window.matchMedia('(display-mode: standalone)').matches ||
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (window.navigator as any).standalone === true
+    );
+  }
+
   return (
-    <div className={'app'}>
-      <ServiceWorkerProvider>
-        <ThemeProvider>
-          <RouterProvider />
-        </ThemeProvider>
-      </ServiceWorkerProvider>
-    </div>
+    <>
+      {isInStandaloneMode() ? (
+        <div className={'app'}>
+          <ServiceWorkerProvider>
+            <ThemeProvider>
+              <RouterProvider />
+            </ThemeProvider>
+          </ServiceWorkerProvider>
+        </div>
+      ) : (
+        <Typography>Установите приложение как PWA</Typography>
+      )}
+    </>
   );
 }
 
