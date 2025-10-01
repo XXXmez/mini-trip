@@ -1,7 +1,7 @@
 /**
  * Перечисляет варианты букв для игры с режимом SINGLE_LETTER.
  */
-export enum StartLetter {
+export enum WordGameStartLetter {
   A = 'а',
   B = 'б',
   V = 'в',

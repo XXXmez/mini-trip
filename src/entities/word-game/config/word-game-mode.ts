@@ -1,7 +1,7 @@
 /**
  * Перечисляет варианты режимов игры в слова.
  */
-export enum GameMode {
+export enum WordGameMode {
   /**
    * На последнюю букву.
    */

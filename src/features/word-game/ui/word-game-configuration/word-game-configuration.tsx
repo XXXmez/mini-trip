@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import {
-  GameConfigModel,
-  GameMode,
   GameSessionModel,
-  StartLetter,
-  TurnTime,
+  getWordGameRandomStartLetter,
   TurnTimeLabels,
+  WordGameConfigModel,
+  WordGameMode,
+  WordGameStartLetter,
+  WordGameTurnTime,
 } from 'entities';
 import { InputField, SelectField, Switch, Typography } from 'shared';
 
@@ -13,30 +14,46 @@ import { LetterGrid } from '../letter-grid';
 
 import styles from './word-game-configuration.module.scss';
 
+/**
+ * Представляет пропсы компонента конфигурации игры в слова.
+ */
 interface WordGameConfigurationProps {
+  /**
+   * Возвращает игровые сессии.
+   */
   readonly sessions: GameSessionModel[];
+  /**
+   * Возвращает колбэк для сохранения конфигурации.
+   */
   readonly onSave: (session: GameSessionModel) => void;
 }
 
+/**
+ * Представляет компонент конфигурации игры в слова.
+ */
 export function WordGameConfiguration(props: WordGameConfigurationProps) {
   const { sessions, onSave } = props;
 
   const defaultGameName = `Игра №${sessions.length + 1}`;
 
   const [name, setName] = useState(defaultGameName);
-  const [mode, setMode] = useState<GameMode>(GameMode.LAST_LETTER);
-  const [turnTime, setTurnTime] = useState<TurnTime>(TurnTime.UNLIMITED);
-  const [letter, setLetter] = useState<StartLetter>(StartLetter.A);
+  const [mode, setMode] = useState<WordGameMode>(WordGameMode.LAST_LETTER);
+  const [turnTime, setTurnTime] = useState<WordGameTurnTime>(
+    WordGameTurnTime.UNLIMITED,
+  );
+  const [letter, setLetter] = useState<WordGameStartLetter>(
+    WordGameStartLetter.A,
+  );
   const [checkWords, setCheckWords] = useState(false);
   const [isRandomLetter, setIsRandomLetter] = useState(false);
   const [hintsEnabled, setHintsEnabled] = useState(false);
 
   const handleSave = () => {
-    const isSingleLetterMode = mode === GameMode.SINGLE_LETTER;
+    const isSingleLetterMode = mode === WordGameMode.SINGLE_LETTER;
 
     const startLetter = isSingleLetterMode
       ? isRandomLetter
-        ? getRandomStartLetter()
+        ? getWordGameRandomStartLetter()
         : letter
       : undefined;
 
@@ -47,7 +64,7 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       checkWords,
       hintsEnabled,
       turnTime,
-    } satisfies GameConfigModel;
+    } satisfies WordGameConfigModel;
 
     const session: GameSessionModel = {
       id: Math.random().toString(36).slice(2) + Date.now(),
@@ -71,12 +88,12 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       <SelectField
         label='Выберите режим'
         value={mode}
-        onChange={(e) => setMode(e.target.value as GameMode)}
+        onChange={(e) => setMode(e.target.value as WordGameMode)}
       >
-        <option value={GameMode.LAST_LETTER}>Последняя буква</option>
-        <option value={GameMode.SINGLE_LETTER}>Одна буква</option>
+        <option value={WordGameMode.LAST_LETTER}>Последняя буква</option>
+        <option value={WordGameMode.SINGLE_LETTER}>Одна буква</option>
       </SelectField>
-      {mode === GameMode.SINGLE_LETTER && (
+      {mode === WordGameMode.SINGLE_LETTER && (
         <>
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
             <Switch checked={isRandomLetter} onChange={setIsRandomLetter} />
@@ -92,9 +109,9 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       <SelectField
         label='Время хода'
         value={turnTime}
-        onChange={(e) => setTurnTime(e.target.value as TurnTime)}
+        onChange={(e) => setTurnTime(e.target.value as WordGameTurnTime)}
       >
-        {Object.values(TurnTime).map((value) => (
+        {Object.values(WordGameTurnTime).map((value) => (
           <option key={value} value={value}>
             {TurnTimeLabels[value]}
           </option>
@@ -113,13 +130,4 @@ export function WordGameConfiguration(props: WordGameConfigurationProps) {
       </button>
     </div>
   );
-}
-
-/**
- * Возвращает случайную букву из перечисления StartLetter.
- */
-function getRandomStartLetter(): StartLetter {
-  const values = Object.values(StartLetter);
-  const index = Math.floor(Math.random() * values.length);
-  return values[index];
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GameMode, GameSessionModel, nouns } from 'entities';
+import { GameSessionModel, nouns, WordGameMode } from 'entities';
 import { BottomSheet, Button, Typography } from 'shared/ui';
 
 import styles from './word-hint-dialog.module.scss';
@@ -54,11 +54,11 @@ export function WordHintDialog({ session, open, onClose }: WordHintProps) {
 }
 
 function getExpectedLetter(session: GameSessionModel): string | undefined {
-  if (session.config.mode === GameMode.SINGLE_LETTER) {
+  if (session.config.mode === WordGameMode.SINGLE_LETTER) {
     return session.config.letter;
   }
   if (
-    session.config.mode === GameMode.LAST_LETTER &&
+    session.config.mode === WordGameMode.LAST_LETTER &&
     session.usedWords.length > 0
   ) {
     const lastWord = session.usedWords[session.usedWords.length - 1];

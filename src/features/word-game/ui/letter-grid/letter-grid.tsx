@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { StartLetter } from 'entities';
+import { WordGameStartLetter } from 'entities';
 
 import styles from './letter-grid.module.scss';
 
 interface LetterGridProps {
-  readonly value: StartLetter;
-  readonly onChange: (letter: StartLetter) => void;
+  readonly value: WordGameStartLetter;
+  readonly onChange: (letter: WordGameStartLetter) => void;
   readonly disabled: boolean;
 }
 
@@ -14,7 +14,7 @@ export const LetterGrid: FC<LetterGridProps> = ({
   onChange,
   disabled,
 }) => {
-  const letters = Object.values(StartLetter);
+  const letters = Object.values(WordGameStartLetter);
 
   return (
     <div className={`${styles.grid} ${disabled ? styles.disabled : ''}`}>

@@ -1,11 +1,9 @@
-import { GameMode } from './game-mode';
-import { StartLetter } from './start-letter';
-import { TurnTime } from './turn-time';
+import { WordGameMode, WordGameStartLetter, WordGameTurnTime } from '../config';
 
 /**
  * Представляет модель конфигурирования игры в слова.
  */
-export interface GameConfigModel {
+export interface WordGameConfigModel {
   /**
    * Возвращает наименование игры.
    */
@@ -13,11 +11,11 @@ export interface GameConfigModel {
   /**
    * Возвращает режим игры.
    */
-  readonly mode: GameMode;
+  readonly mode: WordGameMode;
   /**
    * Возвращает букву хода для режима игры SINGLE_LETTER.
    */
-  readonly letter?: StartLetter;
+  readonly letter?: WordGameStartLetter;
   /**
    * Возвращает признак необходимости проверки слов.
    */
@@ -29,5 +27,5 @@ export interface GameConfigModel {
   /**
    * Возвращает время хода.
    */
-  readonly turnTime: TurnTime;
+  readonly turnTime: WordGameTurnTime;
 }

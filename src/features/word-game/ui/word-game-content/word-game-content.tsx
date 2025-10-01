@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import {
-  GameMode,
   GameSessionModel,
-  getTurnTimeDescription,
+  getWordGameTurnTimeDescription,
   nouns,
-  TurnTime,
+  WordGameMode,
+  WordGameTurnTime,
 } from 'entities';
 import { distance } from 'fastest-levenshtein';
 import { Button, InputField, Typography } from 'shared/ui';
@@ -35,13 +35,13 @@ export function WordGameContent(props: WordGameContentProps) {
   const { id: sessionId, config, usedWords } = session;
   const { letter, mode, turnTime, checkWords } = config;
 
-  const getInitialSeconds = (t: TurnTime): number | null => {
+  const getInitialSeconds = (t: WordGameTurnTime): number | null => {
     switch (t) {
-      case TurnTime.SEC_30:
+      case WordGameTurnTime.SEC_30:
         return 30;
-      case TurnTime.SEC_60:
+      case WordGameTurnTime.SEC_60:
         return 60;
-      case TurnTime.MIN_2:
+      case WordGameTurnTime.MIN_2:
         return 120;
       default:
         return null;
@@ -97,10 +97,10 @@ export function WordGameContent(props: WordGameContentProps) {
   const dictionarySet = new Set(nouns);
 
   const getExpectedLetter = () => {
-    if (mode === GameMode.SINGLE_LETTER) {
+    if (mode === WordGameMode.SINGLE_LETTER) {
       return letter;
     }
-    if (mode === GameMode.LAST_LETTER && usedWords.length > 0) {
+    if (mode === WordGameMode.LAST_LETTER && usedWords.length > 0) {
       const lastWord = usedWords[usedWords.length - 1];
       const skip = ['ь', 'ъ', 'й', 'ы', 'ё'];
       let i = lastWord.length - 1;
@@ -214,7 +214,7 @@ export function WordGameContent(props: WordGameContentProps) {
               Режим
             </Typography>
             <div className={styles.wordGameContentInfoContent}>
-              {mode === GameMode.LAST_LETTER ? (
+              {mode === WordGameMode.LAST_LETTER ? (
                 <Typography>Последняя буква</Typography>
               ) : (
                 <>
@@ -231,7 +231,9 @@ export function WordGameContent(props: WordGameContentProps) {
               Время хода
             </Typography>
             <div className={styles.wordGameContentInfoContent}>
-              <Typography>{getTurnTimeDescription(turnTime)}</Typography>
+              <Typography>
+                {getWordGameTurnTimeDescription(turnTime)}
+              </Typography>
             </div>
           </div>
         </div>
@@ -239,7 +241,7 @@ export function WordGameContent(props: WordGameContentProps) {
           <Typography>{`Проверка слов ${checkWords ? 'включена' : 'выключена'}`}</Typography>
         </div>
         <div className={styles.wordGameContentTimer}>
-          {turnTime !== TurnTime.UNLIMITED && timeLeft && (
+          {turnTime !== WordGameTurnTime.UNLIMITED && timeLeft && (
             <div className={styles.wordGameContentTimerWrapper}>
               <Typography size={'xl5'}>{formatTime(timeLeft)}</Typography>
             </div>

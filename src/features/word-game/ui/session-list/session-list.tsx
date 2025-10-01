@@ -1,7 +1,7 @@
 import {
   GameSessionModel,
   getGameConfigDescription,
-  getTurnTimeDescription,
+  getWordGameTurnTimeDescription,
 } from 'entities';
 import {
   Button,
@@ -73,7 +73,8 @@ export function SessionList(props: SessionListProps) {
                   </Typography>
                 </div>
                 <Typography size='xs'>
-                  Время хода: {getTurnTimeDescription(session.config.turnTime)}
+                  Время хода:{' '}
+                  {getWordGameTurnTimeDescription(session.config.turnTime)}
                 </Typography>
               </div>
 

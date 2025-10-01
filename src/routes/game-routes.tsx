@@ -1,5 +1,4 @@
-import { CarNumbersGamePage } from 'pages/car-numbers-game-page';
-import { WordGamePage } from 'pages/word-game-page';
+import { CarNumbersGamePage, WordGamePage } from 'pages';
 
 import { GameRouteModel } from './types';
 

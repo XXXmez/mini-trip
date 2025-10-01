@@ -1,4 +1,4 @@
-import { HomePage } from 'pages/home-page';
+import { HomePage } from 'pages';
 
 import { gameRoutes } from './game-routes';
 import { AppRouteModel } from './types';

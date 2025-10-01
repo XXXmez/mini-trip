@@ -1,4 +1,4 @@
-import { GameConfigModel } from './game-config-model';
+import { WordGameConfigModel } from './word-game-config-model';
 
 export interface GameSessionModel {
   /**
@@ -8,7 +8,7 @@ export interface GameSessionModel {
   /**
    * Возвращает настройку игры.
    */
-  readonly config: GameConfigModel;
+  readonly config: WordGameConfigModel;
   /**
    * Возвращает использованые в игре слова.
    */
