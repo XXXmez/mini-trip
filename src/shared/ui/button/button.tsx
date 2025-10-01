@@ -9,6 +9,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   readonly size?: ButtonSize;
   readonly variant?: ButtonVariant;
+  readonly width?: string;
 }
 
 export function Button(props: ButtonProps) {
@@ -17,6 +18,8 @@ export function Button(props: ButtonProps) {
     variant = 'primary',
     className,
     children,
+    width,
+    style,
     ...rest
   } = props;
 
@@ -28,6 +31,7 @@ export function Button(props: ButtonProps) {
         styles[variant],
         className,
       )}
+      style={{ width, ...style }}
       {...rest}
     >
       {children}

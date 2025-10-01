@@ -2,10 +2,10 @@
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-areas: 'header' 'info' 'wordCheck' 'timer' 'inputs' 'status' 'loading' 'clue' 'words';
+  grid-template-areas: 'header' 'info' 'wordCheck' 'timer' 'inputs' 'status' 'loading' 'footer';
   grid-template-rows:
     min-content min-content min-content min(80px)
-    auto min-content min-content auto auto;
+    auto min-content min-content auto;
   gap: 8px;
 
   &Title {
@@ -109,62 +109,24 @@
     height: 30px;
   }
 
-  &Clue {
-    grid-area: clue;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &Words {
-    grid-area: words;
+  &Footer {
+    grid-area: footer;
     display: flex;
     flex-direction: column;
-    gap: 8px;
     align-items: center;
     justify-content: center;
+    gap: 8px;
+
+    &Buttons {
+      width: 100%;
+      display: flex;
+      gap: 12px;
+
+      button {
+        opacity: 0.8;
+        flex: 1;
+      }
+    }
   }
 }
 
-/* Модалка */
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modalContent {
-  background: #545454;
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
-  max-height: 70%;
-  overflow-y: auto;
-  position: relative;
-}
-
-.modalContent h2 {
-  margin-top: 0;
-}
-
-.modalClose {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.wordsList {
-  list-style: disc;
-  margin-left: 20px;
-}

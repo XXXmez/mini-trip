@@ -22,6 +22,9 @@ type CheckResult =
   | { status: 'suggest-duplicate'; word: string; suggestions: string[] }
   | { status: 'not-found'; word: string };
 
+/**
+ * Представляет пропсы компонента контента игры в слова.
+ */
 interface WordGameContentProps {
   readonly session: GameSessionModel;
   readonly onExit: () => void;
@@ -29,6 +32,9 @@ interface WordGameContentProps {
   readonly onAddWord: (sessionId: string, word: string) => void;
 }
 
+/**
+ * Представляет компонент контента игры в слова.
+ */
 export function WordGameContent(props: WordGameContentProps) {
   const { session, onFinish, onAddWord } = props;
 
@@ -215,11 +221,14 @@ export function WordGameContent(props: WordGameContentProps) {
             </Typography>
             <div className={styles.wordGameContentInfoContent}>
               {mode === WordGameMode.LAST_LETTER ? (
-                <Typography>Последняя буква</Typography>
+                <Typography size={'sm'}>Последняя буква</Typography>
               ) : (
                 <>
-                  <Typography>На букву</Typography>
-                  <Typography className={styles.wordGameContentInfoLetter}>
+                  <Typography size={'sm'}>На букву</Typography>
+                  <Typography
+                    size={'sm'}
+                    className={styles.wordGameContentInfoLetter}
+                  >
                     {letter}
                   </Typography>
                 </>
@@ -231,7 +240,7 @@ export function WordGameContent(props: WordGameContentProps) {
               Время хода
             </Typography>
             <div className={styles.wordGameContentInfoContent}>
-              <Typography>
+              <Typography size={'sm'}>
                 {getWordGameTurnTimeDescription(turnTime)}
               </Typography>
             </div>
@@ -261,6 +270,7 @@ export function WordGameContent(props: WordGameContentProps) {
             placeholder={'Введите слово'}
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onEnter={handleSubmit}
           />
           <Button onClick={handleSubmit} disabled={loading}>
             Отправить
@@ -272,16 +282,20 @@ export function WordGameContent(props: WordGameContentProps) {
         <div className={styles.wordGameContentLoading}>
           {loading && <div>⏳ Проверяем слово...</div>}
         </div>
-        <div className={styles.wordGameContentClue}>
-          <Button onClick={() => setHintOpen(true)} disabled={loading}>
-            Подсказка
-          </Button>
-        </div>
-        <div className={styles.wordGameContentWords}>
+        <div className={styles.wordGameContentFooter}>
           <Typography>Использовано слов: {usedWords.length}</Typography>
-          <Button onClick={() => setModalOpen(true)} disabled={loading}>
-            Просмотреть все
-          </Button>
+          <div className={styles.wordGameContentFooterButtons}>
+            <Button
+              width={'100%'}
+              onClick={() => setHintOpen(true)}
+              disabled={loading}
+            >
+              <Typography size={'sm'}>Подсказка</Typography>
+            </Button>
+            <Button onClick={() => setModalOpen(true)} disabled={loading}>
+              <Typography size={'sm'}>Просмотреть все</Typography>
+            </Button>
+          </div>
         </div>
       </div>
       <UsedWordsSheet
