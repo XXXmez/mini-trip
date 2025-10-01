@@ -3,9 +3,9 @@
   height: 100%;
   display: grid;
   grid-template-areas: 'header' 'info' 'wordCheck' 'timer' 'inputs' 'status' 'loading' 'clue' 'words';
-  grid-template-rows: min-content min-content min-content min(
-      80px
-    ) auto min-content min-content auto auto;
+  grid-template-rows:
+    min-content min-content min-content min(80px)
+    auto min-content min-content auto auto;
   gap: 8px;
 
   &Title {
