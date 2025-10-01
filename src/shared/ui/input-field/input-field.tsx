@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from 'react';
 
-import { Typography } from 'src/shared';
+import { Typography } from '../typography';
 
 import styles from './input-field.module.scss';
 

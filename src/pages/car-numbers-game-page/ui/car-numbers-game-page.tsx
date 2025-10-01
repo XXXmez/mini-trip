@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-
-import { ChevronLeftIcon, Header, IconButton, Typography } from 'src/shared';
+import { ChevronLeftIcon } from 'shared/assets';
+import { Header, IconButton, Typography } from 'shared/ui';
 
 import styles from './car-numbers-game-page.module.scss';
 

@@ -1,6 +1,6 @@
 import { SelectHTMLAttributes } from 'react';
 
-import { Typography } from 'src/shared';
+import { Typography } from '../typography';
 
 import styles from './select-field.module.scss';
 

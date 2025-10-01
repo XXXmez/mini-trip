@@ -1,25 +1,9 @@
 import { useState } from 'react';
+import { ThemeModal } from 'features';
 import { useNavigate } from 'react-router-dom';
-
-import { ThemeModal } from 'src/features';
-import { gameRoutes } from 'src/providers';
-import { Header, IconButton, Setting } from 'src/shared';
+import { Header, IconButton, Setting } from 'shared';
 
 import styles from './home-page.module.scss';
-
-// const games = [
-//   {
-//     name: 'Словесная дуэль',
-//     path: '/word-game',
-//     description:
-//       'Добавляй слова одно за другим и проверяй, насколько длинной получится цепочка.',
-//   },
-//   {
-//     name: 'Охота за номерами',
-//     path: '/car-numbers',
-//     description: 'Охоться за номерами от 001 до 999 и не упусти ни одного!',
-//   },
-// ];
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -40,16 +24,20 @@ export function HomePage() {
         }
       />
       <div className={styles.gamesList}>
-        {gameRoutes.map((game) => (
-          <div
-            key={game.path}
-            className={styles.gameCard}
-            onClick={() => navigate(game.path)}
-          >
-            <h2>{game.name}</h2>
-            <p>{game.description}</p>
-          </div>
-        ))}
+        <div className={styles.gameCard} onClick={() => navigate('/word-game')}>
+          <h2>Словесная дуэль</h2>
+          <p>
+            Добавляй слова одно за другим и проверяй, насколько длинной
+            получится цепочка.
+          </p>
+        </div>
+        <div
+          className={styles.gameCard}
+          onClick={() => navigate('/car-numbers-game')}
+        >
+          <h2>Охота за номерами</h2>
+          <p>Охоться за номерами от 001 до 999 и не упусти ни одного!</p>
+        </div>
       </div>
       <ThemeModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </div>

@@ -1,0 +1,1 @@
+export { getGameConfigDescription } from './t';

@@ -2,7 +2,7 @@ import {
   RouterProvider,
   ServiceWorkerProvider,
   ThemeProvider,
-} from 'src/providers';
+} from 'providers';
 
 import './App.css';
 import './styles/themes.scss';

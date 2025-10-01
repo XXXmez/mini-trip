@@ -1,5 +1,7 @@
-import { CarNumbersGamePage, WordGamePage } from 'src/pages';
-import { GameRouteModel } from 'src/providers';
+import { CarNumbersGamePage } from 'pages/car-numbers-game-page';
+import { WordGamePage } from 'pages/word-game-page';
+
+import { GameRouteModel } from './types';
 
 export const gameRoutes: GameRouteModel[] = [
   {

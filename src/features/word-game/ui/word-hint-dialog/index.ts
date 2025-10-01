@@ -1,1 +1,1 @@
-export { WordHintDialog } from './word-hint-dialog.tsx';
+export { WordHintDialog } from './word-hint-dialog';

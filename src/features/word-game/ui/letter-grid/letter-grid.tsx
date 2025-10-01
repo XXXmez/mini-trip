@@ -1,6 +1,5 @@
 import { FC } from 'react';
-
-import { StartLetter } from 'src/entities/word-game/config';
+import { StartLetter } from 'entities';
 
 import styles from './letter-grid.module.scss';
 

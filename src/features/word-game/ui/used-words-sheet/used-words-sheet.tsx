@@ -1,4 +1,4 @@
-import { BottomSheet, Typography } from 'src/shared';
+import { BottomSheet, Typography } from 'shared';
 
 import styles from './used-words-sheet.module.scss';
 

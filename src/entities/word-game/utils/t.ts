@@ -1,4 +1,4 @@
-import { GameConfigModel, GameMode } from 'src/entities/word-game';
+import { GameConfigModel, GameMode } from '../config';
 
 /**
  * Преобразует конфигурацию игры в человеко-читаемое описание.

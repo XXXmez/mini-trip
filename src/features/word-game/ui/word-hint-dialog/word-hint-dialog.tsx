@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
-
-import {
-  GameMode,
-  GameSessionModel,
-  nouns,
-} from 'src/entities/word-game/config';
-import { BottomSheet, Button, Typography } from 'src/shared';
+import { GameMode, GameSessionModel, nouns } from 'entities';
+import { BottomSheet, Button, Typography } from 'shared/ui';
 
 import styles from './word-hint-dialog.module.scss';
 

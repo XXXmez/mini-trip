@@ -1,5 +1,6 @@
-import { useThemeInitializer } from 'src/providers';
-import { ChildrenProps } from 'src/shared';
+import { ChildrenProps } from 'shared';
+
+import { useThemeInitializer } from '../../hooks';
 
 type ThemeProviderProps = ChildrenProps;
 

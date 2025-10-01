@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 
-import { ChildrenProps } from 'src/shared';
+import { ChildrenProps } from '../../models';
 
 import styles from './bottom-sheet.module.scss';
 

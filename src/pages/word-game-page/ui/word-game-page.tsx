@@ -1,16 +1,10 @@
 import { useState } from 'react';
+import { GameSessionModel } from 'entities/word-game';
+import { SessionList, WordGameConfiguration, WordGameContent } from 'features';
 import { useNavigate } from 'react-router-dom';
-
-import { WordGameContent } from 'src/entities/word-game';
-import { GameSessionModel } from 'src/entities/word-game/config';
-import { WordGameConfiguration } from 'src/entities/word-game/ui/word-game-configuration/word-game-configuration.tsx';
-import { SessionList } from 'src/features';
-import {
-  ChevronLeftIcon,
-  Header,
-  IconButton,
-  useLocalStorage,
-} from 'src/shared';
+import { ChevronLeftIcon } from 'shared/assets';
+import { useLocalStorage } from 'shared/lib';
+import { Header, IconButton } from 'shared/ui';
 
 import styles from './word-game-page.module.scss';
 

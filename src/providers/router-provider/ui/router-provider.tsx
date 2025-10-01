@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-import { appRoutes } from 'src/providers';
-import { ChildrenProps } from 'src/shared';
+import { appRoutes } from 'routes';
+import { ChildrenProps } from 'shared';
 
 type RouterProviderProps = ChildrenProps;
 

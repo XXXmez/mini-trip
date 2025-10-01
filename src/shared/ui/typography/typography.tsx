@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { ChildrenProps } from 'src/shared';
+import { ChildrenProps } from '../../models';
 
 import styles from './typography.module.scss';
 

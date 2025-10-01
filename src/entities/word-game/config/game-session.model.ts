@@ -1,4 +1,4 @@
-import { GameConfigModel } from 'src/entities/word-game/config/game-config.model.ts';
+import { GameConfigModel } from './game-config.model';
 
 export interface GameSessionModel {
   /**

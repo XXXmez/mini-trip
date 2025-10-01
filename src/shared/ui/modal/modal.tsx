@@ -1,6 +1,9 @@
 import { ReactNode } from 'react';
 
-import { ChildrenProps, CloseIcon, Header, IconButton } from 'src/shared';
+import { CloseIcon } from '../../assets';
+import { ChildrenProps } from '../../models';
+import { Header } from '../header';
+import { IconButton } from '../icon-button';
 
 import styles from './modal.module.scss';
 

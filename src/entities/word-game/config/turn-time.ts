@@ -14,3 +14,10 @@ export const TurnTimeLabels: Record<TurnTime, string> = {
   [TurnTime.SEC_60]: '60 секунд',
   [TurnTime.MIN_2]: '2 минуты',
 };
+
+/**
+ * Преобразует ограничение времени в человеко-читаемое описание.
+ */
+export function getTurnTimeDescription(turnTime: TurnTime): string {
+  return `${TurnTimeLabels[turnTime]}`;
+}

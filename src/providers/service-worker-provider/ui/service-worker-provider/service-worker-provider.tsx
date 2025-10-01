@@ -1,5 +1,6 @@
-import { useServiceWorkerUpdater } from 'src/providers';
-import { ChildrenProps } from 'src/shared';
+import { ChildrenProps } from 'shared';
+
+import { useServiceWorkerUpdater } from '../../hooks';
 
 type ServiceWorkerProviderProps = ChildrenProps;
 

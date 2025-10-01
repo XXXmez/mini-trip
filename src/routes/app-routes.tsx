@@ -1,7 +1,7 @@
-import { HomePage } from 'src/pages';
-import { AppRouteModel } from 'src/providers';
+import { HomePage } from 'pages/home-page';
 
 import { gameRoutes } from './game-routes';
+import { AppRouteModel } from './types';
 
 export const appRoutes: AppRouteModel[] = [
   { path: '/', element: <HomePage /> },

@@ -1,8 +1,16 @@
-import { GameSessionModel } from 'src/entities/word-game/config';
-import { getGameConfigDescription, getTurnTimeDescription } from 'src/pages';
-import { Button, ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
-import { Header } from 'src/shared/ui/header';
-import { Typography } from 'src/shared/ui/typography';
+import {
+  GameSessionModel,
+  getGameConfigDescription,
+  getTurnTimeDescription,
+} from 'entities';
+import {
+  Button,
+  ChevronDownIcon,
+  DeleteIcon,
+  Header,
+  IconButton,
+  Typography,
+} from 'shared';
 
 import styles from './session-list.module.scss';
 

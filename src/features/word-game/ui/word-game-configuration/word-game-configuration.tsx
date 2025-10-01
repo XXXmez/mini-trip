@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import {
   GameConfigModel,
   GameMode,
@@ -7,12 +6,10 @@ import {
   StartLetter,
   TurnTime,
   TurnTimeLabels,
-} from 'src/entities/word-game/config';
-import { Typography } from 'src/shared';
-import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
-import { LetterGrid } from 'src/shared/ui/letter-grid';
-import { SelectField } from 'src/shared/ui/select-field/select-field.tsx';
-import { Switch } from 'src/shared/ui/switch';
+} from 'entities';
+import { InputField, SelectField, Switch, Typography } from 'shared';
+
+import { LetterGrid } from '../letter-grid';
 
 import styles from './word-game-configuration.module.scss';
 

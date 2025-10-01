@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
+import {
+  GameMode,
+  GameSessionModel,
+  getTurnTimeDescription,
+  nouns,
+  TurnTime,
+} from 'entities';
 import { distance } from 'fastest-levenshtein';
+import { Button, InputField, Typography } from 'shared/ui';
 
-import { UsedWordsSheet, WordHintDialog } from 'src/features';
-import { getTurnTimeDescription } from 'src/pages';
-import { Button, Typography } from 'src/shared';
-import { InputField } from 'src/shared/ui/input-field/input-field.tsx';
-
-import { GameMode, GameSessionModel, nouns, TurnTime } from '../../config';
+import { UsedWordsSheet } from '../used-words-sheet';
+import { WordHintDialog } from '../word-hint-dialog';
 
 import styles from './word-game-content.module.scss';
 
@@ -29,7 +33,7 @@ export function WordGameContent(props: WordGameContentProps) {
   const { session, onFinish, onAddWord } = props;
 
   const { id: sessionId, config, usedWords } = session;
-  const { letter, mode, turnTime, checkWords, hintsEnabled } = config;
+  const { letter, mode, turnTime, checkWords } = config;
 
   const getInitialSeconds = (t: TurnTime): number | null => {
     switch (t) {

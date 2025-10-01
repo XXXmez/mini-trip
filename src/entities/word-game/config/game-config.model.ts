@@ -1,6 +1,6 @@
-import { GameMode } from 'src/entities/word-game/config/game-mode.ts';
-import { StartLetter } from 'src/entities/word-game/config/start-letter.ts';
-import { TurnTime } from 'src/entities/word-game/config/turn-time.ts';
+import { GameMode } from './game-mode';
+import { StartLetter } from './start-letter';
+import { TurnTime } from './turn-time';
 
 /**
  * Представляет модель конфигурирования игры в слова.
