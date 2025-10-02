@@ -1,32 +1,15 @@
-import { useEffect } from 'react';
 import {
   RouterProvider,
   ServiceWorkerProvider,
   ThemeProvider,
 } from 'providers';
-import { Typography } from 'shared/ui';
+import { Typography, useBlockEdgeSwipes } from 'shared';
 
 import './App.css';
 import './styles/themes.scss';
 
 function App() {
-  useEffect(() => {
-    const handler = (e: TouchEvent) => {
-      const touch = e.touches[0];
-      const edgeZone = 30; // px от края экрана
-
-      if (
-        touch.clientX < edgeZone ||
-        touch.clientX > window.innerWidth - edgeZone
-      ) {
-        // свайп начинается у края → блокируем
-        e.preventDefault();
-      }
-    };
-
-    document.addEventListener('touchstart', handler, { passive: false });
-    return () => document.removeEventListener('touchstart', handler);
-  }, []);
+  useBlockEdgeSwipes();
 
   function isInStandaloneMode() {
     return (
