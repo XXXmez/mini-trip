@@ -3,7 +3,9 @@
   cursor: pointer;
   font-weight: 500;
   border-radius: 8px;
-  transition: background-color 0.2s, transform 0.1s;
+  transition:
+    background-color 0.2s,
+    transform 0.1s;
 
   // отключаем hover на тач-устройствах
   @media (hover: hover) and (pointer: fine) {

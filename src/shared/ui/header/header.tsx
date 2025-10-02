@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
+import classNames from 'classnames';
 
 import styles from './header.module.scss';
-import classNames from 'classnames';
 
 interface HeaderProps {
   readonly left?: ReactNode;

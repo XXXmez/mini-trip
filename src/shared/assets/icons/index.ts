@@ -1,17 +1,17 @@
-import Setting from './settings.svg';
-import CloseIcon from './close.svg';
+import ChevronDownIcon from './chevron-down.svg';
 import ChevronLeftIcon from './chevron-left.svg';
 import ChevronLRightIcon from './chevron-right.svg';
-import ChevronDownIcon from './chevron-down.svg';
 import ChevronUoIcon from './chevron-up.svg';
+import CloseIcon from './close.svg';
 import DeleteIcon from './delete.svg';
+import Setting from './settings.svg';
 
 export {
-  Setting,
-  CloseIcon,
+  ChevronDownIcon,
   ChevronLeftIcon,
   ChevronLRightIcon,
-  ChevronDownIcon,
   ChevronUoIcon,
+  CloseIcon,
   DeleteIcon,
+  Setting,
 };
