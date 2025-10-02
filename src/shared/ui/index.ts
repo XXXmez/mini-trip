@@ -3,7 +3,6 @@ export * from './button';
 export * from './header';
 export * from './icon-button';
 export * from './input-field';
-export * from './letter-grid';
 export * from './modal';
 export * from './select-field';
 export * from './switch';

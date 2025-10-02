@@ -1,11 +1,16 @@
-import { ChevronDownIcon, DeleteIcon, IconButton } from 'src/shared';
-import { Typography } from 'src/shared/ui/typography';
-import { Header } from 'src/shared/ui/header';
-import { GameSessionModel } from 'src/entities/word-game/config';
 import {
+  GameSessionModel,
   getGameConfigDescription,
-  getTurnTimeDescription,
-} from 'src/pages/word-game-page/ui/word-game-page.tsx';
+  getWordGameTurnTimeDescription,
+} from 'entities';
+import {
+  Button,
+  ChevronDownIcon,
+  DeleteIcon,
+  Header,
+  IconButton,
+  Typography,
+} from 'shared';
 
 import styles from './session-list.module.scss';
 
@@ -21,9 +26,9 @@ export function SessionList(props: SessionListProps) {
 
   return (
     <div className={styles.sessionList}>
-      <button onClick={onNewGame} className={styles.newGameBtn}>
+      <Button onClick={onNewGame} className={styles.newGameBtn}>
         Новая игра
-      </button>
+      </Button>
 
       <Header
         left={<span className={styles.saveTitle}>Сохранения</span>}
@@ -68,7 +73,8 @@ export function SessionList(props: SessionListProps) {
                   </Typography>
                 </div>
                 <Typography size='xs'>
-                  Время хода: {getTurnTimeDescription(session.config.turnTime)}
+                  Время хода:{' '}
+                  {getWordGameTurnTimeDescription(session.config.turnTime)}
                 </Typography>
               </div>
 

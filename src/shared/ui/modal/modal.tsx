@@ -1,14 +1,17 @@
 import { ReactNode } from 'react';
 
-import styles from './modal.module.scss';
-import { CloseIcon, Header, IconButton } from 'src/shared';
+import { CloseIcon } from '../../assets';
+import { ChildrenProps } from '../../models';
+import { Header } from '../header';
+import { IconButton } from '../icon-button';
 
-interface ModalProps {
+import styles from './modal.module.scss';
+
+interface ModalProps extends ChildrenProps {
   readonly isOpen: boolean;
   readonly onClose?: () => void;
   readonly title?: ReactNode;
   readonly maxWidth?: string;
-  readonly children: ReactNode;
 }
 
 export function Modal(props: ModalProps) {

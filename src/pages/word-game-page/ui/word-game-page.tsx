@@ -1,18 +1,12 @@
-import styles from './word-game-page.module.scss';
-import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
-import {
-  GameConfigModel,
-  GameMode,
-  GameSessionModel,
-  TurnTime,
-  TurnTimeLabels,
-} from 'src/entities/word-game/config';
 import { useState } from 'react';
-import { WordGameConfiguration } from 'src/entities/word-game/ui/word-game-configuration/word-game-configuration.tsx';
-import { WordGameContent } from 'src/entities/word-game/ui/word-game-content/word-game-content.tsx';
-import { ChevronLeftIcon, Header, IconButton } from 'src/shared';
+import { GameSessionModel } from 'entities/word-game';
+import { SessionList, WordGameConfiguration, WordGameContent } from 'features';
 import { useNavigate } from 'react-router-dom';
-import { SessionList } from 'src/features';
+import { ChevronLeftIcon } from 'shared/assets';
+import { useLocalStorage } from 'shared/lib';
+import { Header, IconButton } from 'shared/ui';
+
+import styles from './word-game-page.module.scss';
 
 const keyGame = 'word-game-sessions';
 
@@ -108,7 +102,7 @@ export function WordGamePage() {
           />
         )}
 
-        {screen === 'config' && (
+        {screen === GameScreen.CONFIG && (
           <WordGameConfiguration
             sessions={sessions}
             onSave={(session) => {
@@ -119,7 +113,7 @@ export function WordGamePage() {
           />
         )}
 
-        {screen === 'game' && activeSession && (
+        {screen === GameScreen.GAME && activeSession && (
           <WordGameContent
             session={activeSession}
             onExit={() => setScreen(GameScreen.LIST)}
@@ -130,27 +124,4 @@ export function WordGamePage() {
       </div>
     </div>
   );
-}
-
-/**
- * Преобразует конфигурацию игры в человеко-читаемое описание.
- */
-export function getGameConfigDescription(config: GameConfigModel): string {
-  switch (config.mode) {
-    case GameMode.SINGLE_LETTER:
-      return `Режим: На букву «${config.letter?.toUpperCase()}»`;
-
-    case GameMode.LAST_LETTER:
-      return 'Режим: Последняя буква';
-
-    default:
-      return 'Режим: Неизвестно';
-  }
-}
-
-/**
- * Преобразует ограничение времени в человеко-читаемое описание.
- */
-export function getTurnTimeDescription(turnTime: TurnTime): string {
-  return `${TurnTimeLabels[turnTime]}`;
 }

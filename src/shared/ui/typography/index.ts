@@ -1,6 +1,6 @@
 export {
-  type TextWeight,
   type As,
   type TextSize,
+  type TextWeight,
   Typography,
 } from './typography';

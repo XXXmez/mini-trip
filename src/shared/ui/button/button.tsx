@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
 
 import styles from './button.module.scss';
@@ -7,17 +7,22 @@ type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  size?: ButtonSize;
-  variant?: ButtonVariant;
+  readonly size?: ButtonSize;
+  readonly variant?: ButtonVariant;
+  readonly width?: string;
 }
 
-export const Button: FC<ButtonProps> = ({
-  size = 'md',
-  variant = 'primary',
-  className,
-  children,
-  ...rest
-}) => {
+export function Button(props: ButtonProps) {
+  const {
+    size = 'md',
+    variant = 'primary',
+    className,
+    children,
+    width,
+    style,
+    ...rest
+  } = props;
+
   return (
     <button
       className={classNames(
@@ -26,9 +31,10 @@ export const Button: FC<ButtonProps> = ({
         styles[variant],
         className,
       )}
+      style={{ width, ...style }}
       {...rest}
     >
       {children}
     </button>
   );
-};
+}

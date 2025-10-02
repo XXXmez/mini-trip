@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Modal } from 'src/shared';
-import { useLocalStorage } from 'src/shared/lib/hooks/use-local-storage.ts';
+import { useEffect, useState } from 'react';
+import { Modal, useLocalStorage } from 'shared';
 
 import styles from './theme-modal.module.scss';
 
@@ -25,14 +24,14 @@ export function ThemeModal({ isOpen, onClose }: ThemeModalProps) {
   useEffect(() => {
     document.documentElement.className = selected;
     setStoredTheme(selected);
-  }, [selected]);
+  }, [selected, setStoredTheme]);
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       title='Выберите тему'
-      maxWidth='400px'
+      maxWidth='300px'
     >
       <div className={styles.themeList}>
         {themes.map((theme) => (
