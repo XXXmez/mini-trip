@@ -1,9 +1,10 @@
+import { InstallAppScreen } from 'features';
 import {
   RouterProvider,
   ServiceWorkerProvider,
   ThemeProvider,
 } from 'providers';
-import { Typography, useBlockEdgeSwipes } from 'shared';
+import { useBlockEdgeSwipes } from 'shared';
 
 import './App.css';
 import './styles/themes.scss';
@@ -30,7 +31,7 @@ function App() {
           </ServiceWorkerProvider>
         </div>
       ) : (
-        <Typography>Установите приложение как PWA</Typography>
+        <InstallAppScreen />
       )}
     </>
   );
