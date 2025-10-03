@@ -1,69 +1,56 @@
-# React + TypeScript + Vite
+# Mini Trip
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Mini Trip** — это веб-приложение на React + TypeScript + Vite с поддержкой PWA, созданное для игр и интерактивных мини-приложений.  
 
-Currently, two official plugins are available:
+Проект объединяет несколько мини-игр, включая словесную дуэль и поиск номеров авто. Игровой контент динамически загружается, поддерживается таймер ходов, подсказки и система проверки слов.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Основные технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 18 + TypeScript** — для построения компонентов и бизнес-логики.
+- **Vite** — быстрый сборщик и дев-сервер с поддержкой HMR.
+- **Zustand** — управление состоянием.
+- **React Router** — маршрутизация страниц.
+- **SCSS / CSS Modules** — стилизация компонентов.
+- **PWA** — поддержка установки приложения на мобильные устройства и офлайн-режим.
+- **Phaser.js** (для мини-игр с анимацией, если используется).
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Структура проекта (FSD)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- `app/` — корневой контейнер приложения, настройки провайдеров и маршрутизация.
+- `entities/` — модели данных и бизнес-логика (например, игры, предметы, инвентарь).
+- `features/` — отдельные функциональные блоки и хранилища.
+- `pages/` — страницы приложения, например HomePage, WordGamePage.
+- `shared/` — общие UI-компоненты, хуки, утилиты.
+- `assets/` — изображения, шрифты, иконки.
+- `styles/` — глобальные SCSS-файлы, темы.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+## Игровые возможности
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
+- **Словесная дуэль** — игроки вводят слова по правилам, проверяется последняя буква и дубли.
+- **Подсказки** — скрытые буквы слов, генерация новых подсказок по моде игры.
+- **Инвентарь** — хранение введённых слов и игровых предметов, просмотр через BottomSheet.
+- **Таймер** — ограничение времени хода, с автообновлением.
+- **PWA-режим** — блокировка свайпов браузера и установка на мобильное устройство.
+
+---
+
+## Настройка и запуск
+
+```bash
+# Установить зависимости
+npm install
+
+# Запуск в режиме разработки
+npm run dev
+
+# Сборка для продакшн
+npm run build
+
+# Локальный просмотр собранного приложения
+npm run preview
